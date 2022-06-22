@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "bdk-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bitcoindevkit/bdk-swift",
+      "state" : {
+        "revision" : "5622b070479578490c43cb2f31200215a2c1d1b6",
+        "version" : "0.3.0"
+      }
+    }
+  ],
+  "version" : 2
+}

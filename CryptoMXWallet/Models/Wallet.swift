@@ -1,0 +1,90 @@
+//
+//  Wallet.swift
+//  CryptoMXWallet
+//
+//  Created by Osvaldo Rosales Perez on 01/06/22.
+//
+
+import Foundation
+import SwiftUI
+import BitcoinDevKit
+
+class Wallet: ObservableObject {
+    @Published private(set) var bdkWallet: BitcoinDevKit.Wallet!
+    @Published private(set) var blockchain: BitcoinDevKit.Blockchain!
+    @Published private(set) var path: String = ""
+    private(set) var electrumURL: String = "ssl://electrum.blockstream.info:60002"
+    @Published private(set) var balance: UInt64 = 0
+    @Published private(set) var balanceText = "Sync wallet"
+
+    func setPath(pathToSave: String) {
+        path = pathToSave
+    }
+    
+    private func initialize(descriptor: String, changeDescriptor: String) {
+        let path = NSSearchPathForDirectoriesInDomains(
+            .documentDirectory, .userDomainMask, true
+        ).first!
+        let electrum = ElectrumConfig(url: electrumURL, socks5: nil, retry: 5, timeout: nil, stopGap: 10)
+        let database = DatabaseConfig.sled(config: SledDbConfiguration(path: "\(path)/bdkSled", treeName: "bskTree"))
+        do {
+            blockchain = try BitcoinDevKit.Blockchain(config: BlockchainConfig.electrum(config: electrum))
+        } catch let error {
+            print("Initialize blockchain error: \(error)")
+        }
+        
+        do {
+            bdkWallet = try BitcoinDevKit.Wallet(descriptor: descriptor, changeDescriptor: changeDescriptor, network: Network.testnet, databaseConfig: database)
+        } catch let error {
+            print("Initialize wallet error: \(error)")
+        }
+        
+        // Sync
+        sync()
+    }
+    
+    func createWallet() {
+        do {
+            let keys: ExtendedKeyInfo = try generateExtendedKey(network: Network.testnet, wordCount: WordCount.words12, password: nil)
+            let descriptor: String = createDescriptor(keys: keys)
+            let changeDescriptor: String = createChangeDescriptor(keys: keys)
+            
+            initialize(descriptor: descriptor, changeDescriptor: changeDescriptor)
+            
+            // Repository.saveWallet(path, descriptor, change descriptor)
+            // Respository.saveMnemonic(keys.mnemonic)
+            
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    private func createDescriptor(keys: ExtendedKeyInfo) -> String {
+        var descriptor: String = "wpkh(\(keys.xprv)/84'/1'/0'/0/*)"
+        print("descriptor: \(descriptor)")
+        
+        // for debugging
+        descriptor = "wpkh(tprv8ZgxMBicQKsPdiCqH6nHDmXm6SL2TFkWS5T5jaZqa8hEPHWj9jjXL51z2jNWXsfiDzhNfBWKSmgS2ue9UnWEGX4Ej8SKE52PV1GDtmyyXVk/84'/1'/0'/0/*)"
+        return descriptor
+    }
+    
+    private func createChangeDescriptor(keys: ExtendedKeyInfo) -> String {
+        var changeDescriptor: String = "wpkh(\(keys.xprv)/84'/1'/0'/1/*)"
+        print("change descriptor: \(changeDescriptor)")
+        
+        // for debugging
+        changeDescriptor = "wpkh(tprv8ZgxMBicQKsPdiCqH6nHDmXm6SL2TFkWS5T5jaZqa8hEPHWj9jjXL51z2jNWXsfiDzhNfBWKSmgS2ue9UnWEGX4Ej8SKE52PV1GDtmyyXVk/84'/1'/0'/1/*)"
+        return changeDescriptor
+    }
+    
+    func sync() {
+        do {
+            print("Syncing ...")
+            try bdkWallet.sync(blockchain: blockchain, progress: nil)
+            balance = try bdkWallet.getBalance()
+            balanceText = String(format: "%.8f", Double(balance) / Double(100000000))
+        } catch let error {
+            print(error)
+        }
+    }
+}
