@@ -13,8 +13,13 @@ let filter = CIFilter.qrCodeGenerator()
 
 struct ReceiveView: View {
     @EnvironmentObject var wallet: Wallet
-//    @State private var address: String = "tb1qfafsasdfasd"
+//    var address : String = "Generate new address"
+
     
+    func updateAddress() {
+        wallet.getLastUnusedAddress()
+        wallet.getNewAddress()
+    }
     
     func splitAddress(address: String) -> (String, String) {
         let length = address.count
@@ -22,17 +27,8 @@ struct ReceiveView: View {
         return (String(address.prefix(length / 2)), String(address.suffix(length / 2)))
     }
     
-//    func getAddress() {
-//        switch viewModel.state {
-//            case .loaded(let wallet, _):
-//                do {
-//                    address = wallet.getNewAddress()
-//                }
-//            default: do { }
-//        }
-//    }
     
-    func generateQRCode(from string: String) -> UIImage {
+    private func generateQRCode(from string: String) -> UIImage {
         let data = Data(string.utf8)
         filter.setValue(data, forKey: "inputMessage")
 
@@ -46,35 +42,46 @@ struct ReceiveView: View {
     }
     
     var body: some View {
-        BackgroundWrapper {
+        VStack(spacing: 40){
             Spacer()
             VStack {
-                Image(uiImage: generateQRCode(from: "bitcoin:\(viewModel.latestAddress)"))
+                Image(uiImage: generateQRCode(from: "bitcoin:\(wallet.latestAddress)"))
                     .interpolation(.none)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 200)
                 Spacer()
-                Text(splitAddress(address: viewModel.latestAddress).0).textStyle(BasicTextStyle())
-                Text(splitAddress(address: viewModel.latestAddress).1).textStyle(BasicTextStyle())
+//                Text(wallet.latestAddress)
+                Text(splitAddress(address: wallet.latestAddress).0).textStyle(BasicTextStyle())
+                Text(splitAddress(address: wallet.latestAddress).1).textStyle(BasicTextStyle())
+                
                 Spacer()
             }.contextMenu {
                 Button(action: {
-                    UIPasteboard.general.string = viewModel.latestAddress}) {
+                    UIPasteboard.general.string = wallet.latestAddress}) {
                         Text("Copy to clipboard")
                     }
             }
             Spacer()
-            BasicButton(action: viewModel.getNewAddress, text: "Generate new address", color: "Green")
+            
+            Button{
+                updateAddress()
+            } label: {
+                PrimaryButton(text: "Generate new address")
+            }
         }
         .navigationBarTitle("Receive Address")
-        .modifier(BackButtonMod())
-        .onAppear(perform: viewModel.getNewAddress)
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color("Background"))
+//        .modifier(BackButtonMod())
+        .onAppear(perform: updateAddress)
     }
 }
 
 struct ReceiveView_Previews: PreviewProvider {
     static var previews: some View {
         ReceiveView()
+            .environmentObject(Wallet())
     }
 }

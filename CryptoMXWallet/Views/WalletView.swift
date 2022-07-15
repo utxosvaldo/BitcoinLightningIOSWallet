@@ -10,10 +10,14 @@ import SwiftUI
 struct WalletView: View {
     @EnvironmentObject var wallet: Wallet
     
+    func sync() {
+        if wallet.bdkWallet == nil {
+            wallet.createWallet()
+        }
+        wallet.sync()
+    }
+    
     var body: some View {
-        
-        
-        
         VStack(spacing: 40){
             HStack{
                 Text("CryptoMX Wallet")
@@ -36,15 +40,14 @@ struct WalletView: View {
             HStack{
 //                NavigationView {
                 NavigationLink {
-//                    ReceiveView()
-//                        .environmentObject(walletManager)
+                    ReceiveView().environmentObject(wallet)
                 } label: {
                     PrimaryButton(text: "Receive", background: Color("Receive"))
                 }
                 
                 NavigationLink{
-//                    SendView()
-//                        .environmentObject(walletManager)
+                    SendView()
+                        .environmentObject(wallet)
                 } label: {
                     PrimaryButton(text: "Send", background: Color("Send"))
                 }
@@ -59,7 +62,7 @@ struct WalletView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("Background"))
         .navigationBarHidden(true)
-        .onAppear(perform: wallet.createWallet)
+        .onAppear(perform: sync)
     }
 }
 

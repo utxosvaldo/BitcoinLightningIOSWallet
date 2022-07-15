@@ -28,17 +28,21 @@ struct ContentView: View {
                 VStack(spacing: 20){
                     Text("CryptoMX")
                         .lilacTitle()
-                    Text("Are you ready to test out your trivia skills?")
+                    Text("wallet")
                         .foregroundColor(Color("AccentColor"))
                     
                 }
+                
+                
                 
                 NavigationLink {
                     WalletView()
                         .environmentObject(wallet)
                 } label: {
                     PrimaryButton(text: "Create Wallet")
+//                        .onTapGesture(perform: wallet.createWallet)
                 }
+                 
                 
                 NavigationLink {
                     WalletView()

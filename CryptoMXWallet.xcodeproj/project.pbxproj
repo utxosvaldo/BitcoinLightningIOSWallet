@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		183C11D9286397BF0071A291 /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11D8286397BF0071A291 /* ReceiveView.swift */; };
+		183C11DB28639CBA0071A291 /* BasicTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11DA28639CBA0071A291 /* BasicTextStyle.swift */; };
+		183C11DD286448530071A291 /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11DC286448530071A291 /* BasicButton.swift */; };
+		183C11DF28644B5D0071A291 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11DE28644B5D0071A291 /* SendView.swift */; };
+		1873A57D288101DC00F21212 /* BitcoinDevKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1873A57C288101DC00F21212 /* BitcoinDevKit */; };
+		1873A581288104AF00F21212 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 1873A580288104AF00F21212 /* CodeScanner */; };
 		18DDCC32284847BD0051BBE0 /* CryptoMXWalletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DDCC31284847BD0051BBE0 /* CryptoMXWalletApp.swift */; };
 		18DDCC36284847C00051BBE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18DDCC35284847C00051BBE0 /* Assets.xcassets */; };
 		18DDCC39284847C00051BBE0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18DDCC38284847C00051BBE0 /* Preview Assets.xcassets */; };
@@ -16,13 +21,15 @@
 		18DDCC4A28484D2F0051BBE0 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DDCC4928484D2F0051BBE0 /* PrimaryButton.swift */; };
 		18DDCC4D28484E200051BBE0 /* lilacTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DDCC4C28484E200051BBE0 /* lilacTitle.swift */; };
 		18DDCC502848508F0051BBE0 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DDCC4F2848508F0051BBE0 /* Wallet.swift */; };
-		18DDCC53284851260051BBE0 /* BitcoinDevKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18DDCC52284851260051BBE0 /* BitcoinDevKit */; };
 		18DDCC55284889920051BBE0 /* BalanceDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DDCC54284889920051BBE0 /* BalanceDisplay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		183C11D72863856A0071A291 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = ../MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		183C11D8286397BF0071A291 /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
+		183C11DA28639CBA0071A291 /* BasicTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTextStyle.swift; sourceTree = "<group>"; };
+		183C11DC286448530071A291 /* BasicButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
+		183C11DE28644B5D0071A291 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		18DDCC2E284847BD0051BBE0 /* CryptoMXWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoMXWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18DDCC31284847BD0051BBE0 /* CryptoMXWalletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMXWalletApp.swift; sourceTree = "<group>"; };
 		18DDCC35284847C00051BBE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,7 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18DDCC53284851260051BBE0 /* BitcoinDevKit in Frameworks */,
+				1873A581288104AF00F21212 /* CodeScanner in Frameworks */,
+				1873A57D288101DC00F21212 /* BitcoinDevKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +100,7 @@
 				18DDCC4028484BD50051BBE0 /* WalletView.swift */,
 				18DDCC4228484C3A0051BBE0 /* ContentView.swift */,
 				183C11D8286397BF0071A291 /* ReceiveView.swift */,
+				183C11DE28644B5D0071A291 /* SendView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -101,6 +110,7 @@
 			children = (
 				18DDCC4928484D2F0051BBE0 /* PrimaryButton.swift */,
 				18DDCC54284889920051BBE0 /* BalanceDisplay.swift */,
+				183C11DC286448530071A291 /* BasicButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -109,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				18DDCC4C28484E200051BBE0 /* lilacTitle.swift */,
+				183C11DA28639CBA0071A291 /* BasicTextStyle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -138,7 +149,8 @@
 			);
 			name = CryptoMXWallet;
 			packageProductDependencies = (
-				18DDCC52284851260051BBE0 /* BitcoinDevKit */,
+				1873A57C288101DC00F21212 /* BitcoinDevKit */,
+				1873A580288104AF00F21212 /* CodeScanner */,
 			);
 			productName = CryptoMXWallet;
 			productReference = 18DDCC2E284847BD0051BBE0 /* CryptoMXWallet.app */;
@@ -169,7 +181,8 @@
 			);
 			mainGroup = 18DDCC25284847BD0051BBE0;
 			packageReferences = (
-				18DDCC51284851260051BBE0 /* XCRemoteSwiftPackageReference "bdk-swift" */,
+				1873A57B288101DC00F21212 /* XCRemoteSwiftPackageReference "bdk-swift" */,
+				1873A57F288104AF00F21212 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 18DDCC2F284847BD0051BBE0 /* Products */;
 			projectDirPath = "";
@@ -198,11 +211,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				18DDCC502848508F0051BBE0 /* Wallet.swift in Sources */,
+				183C11DB28639CBA0071A291 /* BasicTextStyle.swift in Sources */,
 				18DDCC32284847BD0051BBE0 /* CryptoMXWalletApp.swift in Sources */,
 				183C11D9286397BF0071A291 /* ReceiveView.swift in Sources */,
 				18DDCC55284889920051BBE0 /* BalanceDisplay.swift in Sources */,
 				18DDCC4D28484E200051BBE0 /* lilacTitle.swift in Sources */,
+				183C11DD286448530071A291 /* BasicButton.swift in Sources */,
 				18DDCC4A28484D2F0051BBE0 /* PrimaryButton.swift in Sources */,
+				183C11DF28644B5D0071A291 /* SendView.swift in Sources */,
 				18DDCC4328484C3A0051BBE0 /* ContentView.swift in Sources */,
 				18DDCC4128484BD50051BBE0 /* WalletView.swift in Sources */,
 			);
@@ -407,7 +423,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		18DDCC51284851260051BBE0 /* XCRemoteSwiftPackageReference "bdk-swift" */ = {
+		1873A57B288101DC00F21212 /* XCRemoteSwiftPackageReference "bdk-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bitcoindevkit/bdk-swift";
 			requirement = {
@@ -415,13 +431,26 @@
 				version = 0.3.0;
 			};
 		};
+		1873A57F288104AF00F21212 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = exactVersion;
+				version = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		18DDCC52284851260051BBE0 /* BitcoinDevKit */ = {
+		1873A57C288101DC00F21212 /* BitcoinDevKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 18DDCC51284851260051BBE0 /* XCRemoteSwiftPackageReference "bdk-swift" */;
+			package = 1873A57B288101DC00F21212 /* XCRemoteSwiftPackageReference "bdk-swift" */;
 			productName = BitcoinDevKit;
+		};
+		1873A580288104AF00F21212 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1873A57F288104AF00F21212 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -16,6 +16,8 @@ class Wallet: ObservableObject {
     private(set) var electrumURL: String = "ssl://electrum.blockstream.info:60002"
     @Published private(set) var balance: UInt64 = 0
     @Published private(set) var balanceText = "Sync wallet"
+    @Published private(set) var latestAddress = "Generate new address"
+    @Published private(set) var newAddress = "Generate new address"
 
     func setPath(pathToSave: String) {
         path = pathToSave
@@ -87,4 +89,28 @@ class Wallet: ObservableObject {
             print(error)
         }
     }
+    
+    func getNewAddress() {
+        latestAddress = bdkWallet.getNewAddress()
+        return
+    }
+    
+    func getLastUnusedAddress() {
+        latestAddress = bdkWallet.getLastUnusedAddress()
+        return 
+    }
+    
+    func broadcastTx(recipient: String, amount: UInt64) {
+        do {
+            let txBuilder = TxBuilder().addRecipient(address: recipient, amount: amount)
+            let psbt = try txBuilder.finish(wallet: bdkWallet)
+            try bdkWallet.sign(psbt: psbt)
+            try blockchain.broadcast(psbt: psbt)
+            let txid = psbt.txid()
+            print(txid)
+        } catch let error {
+            print(error)
+        }
+    }
+    
 }
