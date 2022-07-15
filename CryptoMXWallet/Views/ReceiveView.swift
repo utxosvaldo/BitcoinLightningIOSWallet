@@ -43,6 +43,11 @@ struct ReceiveView: View {
     
     var body: some View {
         VStack(spacing: 40){
+            
+            HStack{
+                Text("Receive Bitcoin")
+                    .lilacTitle()
+            }
             Spacer()
             VStack {
                 Image(uiImage: generateQRCode(from: "bitcoin:\(wallet.latestAddress)"))
@@ -70,7 +75,7 @@ struct ReceiveView: View {
                 PrimaryButton(text: "Generate new address")
             }
         }
-        .navigationBarTitle("Receive Address")
+//        .navigationBarTitle("Receive Address")
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color("Background"))
