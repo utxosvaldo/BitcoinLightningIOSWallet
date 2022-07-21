@@ -1,13 +1,13 @@
 //
-//  NewWalletView.swift
+//  BitcoinWalletView.swift
 //  CryptoMXWallet
 //
-//  Created by Osvaldo Rosales Perez on 16/07/22.
+//  Created by Osvaldo Rosales Perez on 20/07/22.
 //
 
 import SwiftUI
 
-struct WalletView: View {
+struct BitcoinWalletView: View {
     @EnvironmentObject var wallet: Wallet
     
     func sync() {
@@ -19,7 +19,7 @@ struct WalletView: View {
     
     var body: some View {
         VStack(spacing: 40) {
-            Text("CryptoMX Wallet").lilacTitle()
+            Text("Bitcoin Wallet").lilacTitle()
             
             Spacer()
             BalanceDisplay(balance: wallet.balanceText)
@@ -43,16 +43,15 @@ struct WalletView: View {
             
             Spacer()
         }
-        .navigationBarHidden(true)
         .padding()
         .onAppear(perform: sync)
     }
 }
         
 
-struct WalletView_Previews: PreviewProvider {
+struct BitcoinWalletView_Previews: PreviewProvider {
     static var previews: some View {
-        WalletView()
+        BitcoinWalletView()
             .environmentObject(Wallet())
     }
 }
