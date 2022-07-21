@@ -25,9 +25,6 @@ class Wallet: ObservableObject {
     }
     
     private func initialize(descriptor: String, changeDescriptor: String) {
-        let path = NSSearchPathForDirectoriesInDomains(
-            .documentDirectory, .userDomainMask, true
-        ).first!
         let electrum = ElectrumConfig(url: electrumURL, socks5: nil, retry: 5, timeout: nil, stopGap: 10)
         let database = DatabaseConfig.sled(config: SledDbConfiguration(path: "\(path)/bdkSled", treeName: "bskTree"))
         do {

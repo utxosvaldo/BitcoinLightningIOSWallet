@@ -9,15 +9,21 @@ import SwiftUI
 
 @main
 struct CryptoMXWalletApp: App {
-    @StateObject var wallet = Wallet()
-    // Initialize wallet object (singleton) with path variable
+//    @StateObject var wallet = Wallet()
+    @StateObject var wallet: Wallet = Wallet()
     
-    // Initialize shared preferences manager object (singleton)
-    
-    // Initialize Repository object with shared preferences
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(wallet)
+            ContentView()
+                .environmentObject(wallet)
+                .onAppear(perform: onCreate)
         }
+    }
+    
+    func onCreate(){
+        // Set path
+        wallet.setPath(pathToSave:NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!)
+        
+        //
     }
 }

@@ -50,6 +50,7 @@ struct BitcoinWalletView: View {
         
 
 struct BitcoinWalletView_Previews: PreviewProvider {
+    
     static var previews: some View {
         BitcoinWalletView()
             .environmentObject(Wallet())
