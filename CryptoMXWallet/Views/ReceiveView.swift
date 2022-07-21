@@ -13,9 +13,7 @@ let filter = CIFilter.qrCodeGenerator()
 
 struct ReceiveView: View {
     @EnvironmentObject var wallet: Wallet
-//    var address : String = "Generate new address"
 
-    
     func updateAddress() {
         wallet.getLastUnusedAddress()
         wallet.getNewAddress()
@@ -26,7 +24,6 @@ struct ReceiveView: View {
         
         return (String(address.prefix(length / 2)), String(address.suffix(length / 2)))
     }
-    
     
     private func generateQRCode(from string: String) -> UIImage {
         let data = Data(string.utf8)
@@ -49,6 +46,7 @@ struct ReceiveView: View {
                     .lilacTitle()
             }
             Spacer()
+            
             VStack {
                 Image(uiImage: generateQRCode(from: "bitcoin:\(wallet.latestAddress)"))
                     .interpolation(.none)
@@ -75,12 +73,9 @@ struct ReceiveView: View {
                 PrimaryButton(text: "Generate new address")
             }
         }
-//        .navigationBarTitle("Receive Address")
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("Background"))
-//        .modifier(BackButtonMod())
-        .onAppear(perform: updateAddress)
+//        .onAppear(perform: updateAddress)
     }
 }
 

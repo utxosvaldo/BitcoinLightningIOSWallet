@@ -15,6 +15,7 @@ struct BasicTextStyle: ViewModifier {
         content
             .font(.system(size: big ? 32 : 14, design: .monospaced).weight(bold ? .bold : .regular))
             .foregroundColor(white ? Color.white : Color("Shadow"))
+            .multilineTextAlignment(.trailing)
             
     }
 }

@@ -18,6 +18,7 @@ class Wallet: ObservableObject {
     @Published private(set) var balanceText = "Sync wallet"
     @Published private(set) var latestAddress = "Generate new address"
     @Published private(set) var newAddress = "Generate new address"
+    @Published private(set) var transactions: [BitcoinDevKit.Transaction] = []
 
     func setPath(pathToSave: String) {
         path = pathToSave
@@ -85,6 +86,20 @@ class Wallet: ObservableObject {
             try bdkWallet.sync(blockchain: blockchain, progress: nil)
             balance = try bdkWallet.getBalance()
             balanceText = String(format: "%.8f", Double(balance) / Double(100000000))
+            let wallet_transactions = try bdkWallet.getTransactions()
+            transactions = wallet_transactions.sorted(by: {
+            switch $0 {
+            case .confirmed(_, let confirmation_a):
+                switch $1 {
+                case .confirmed(_, let confirmation_b): return confirmation_a.timestamp > confirmation_b.timestamp
+                default: return false
+                }
+            default:
+                switch $1 {
+                case .unconfirmed(_): return true
+                default: return false
+                }
+            } })
         } catch let error {
             print(error)
         }

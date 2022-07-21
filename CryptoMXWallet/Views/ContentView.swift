@@ -9,17 +9,7 @@ import Foundation
 import SwiftUI
 
 struct ContentView: View {
-//    @StateObject var triviaManager = TriviaManager()
     @EnvironmentObject var wallet: Wallet
-//    @Published var path: String = " asefaf"
-    
-    
-//    func setWallet() {
-//        wallet.setPath(pathToSave: NSSearchPathForDirectoriesInDomains(
-//        .documentDirectory, .userDomainMask, true
-//        ).first!)
-//    }
-    
     
     var body: some View {
         
@@ -32,35 +22,20 @@ struct ContentView: View {
                         .foregroundColor(Color("AccentColor"))
                     
                 }
+            
                 
-                
-                
-                NavigationLink {
-                    WalletView()
-                        .environmentObject(wallet)
-                } label: {
+                NavigationLink(destination: WalletView().environmentObject(wallet)){
                     PrimaryButton(text: "Create Wallet")
-//                        .onTapGesture(perform: wallet.createWallet)
                 }
-                 
                 
-                NavigationLink {
-                    WalletView()
-                        .environmentObject(wallet)
-                } label: {
+                NavigationLink(destination: WalletView().environmentObject(wallet)){
                     PrimaryButton(text: "Import Wallet")
                 }
-                
-
                 
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .edgesIgnoringSafeArea(.all)
-        .background(Color(red: 0.9, green: 0.9, blue: 0.8))
         }
-//        .onAppear(perform: wallet.setPath(pathToSave: NSSearchPathForDirectoriesInDomains(
-//            .documentDirectory, .userDomainMask, true
-//        ).first!))
     }
 }
 

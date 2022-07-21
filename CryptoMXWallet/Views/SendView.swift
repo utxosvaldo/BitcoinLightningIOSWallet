@@ -3,7 +3,7 @@
 //  CryptoMXWallet
 //
 //  Created by Osvaldo Rosales Perez on 23/06/22.
-//
+//)
 
 import SwiftUI
 import Combine
@@ -15,10 +15,11 @@ struct SendView: View {
     @State var to: String = ""
     @State var amount: String = "0"
     @State private var isShowingScanner = false
+    @FocusState private var isAmountFocused: Bool
     
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
     func handleScan(result: Result<String, CodeScannerView.ScanError>) {
-       self.isShowingScanner = false
+        self.isShowingScanner = false
         switch result {
         case .success(let code):
             self.to = code
@@ -35,13 +36,23 @@ struct SendView: View {
                     .lilacTitle()
             }
             
+            
             Form {
                 Section(header: Text("Recipient")) {
-                    TextField("Address", text: $to)
-//                        .modifier(BasicTextFieldStyle())
+                    HStack{
+                        TextField("Address", text: $to)
+                            .submitLabel(.done)
+                        Button(action: {self.isShowingScanner = true}){
+                            Image(systemName: "camera")
+                        }
+                        .sheet(isPresented: $isShowingScanner){
+                            CodeScannerView(codeTypes: [.qr], simulatedData: "Testing1234", completion: self.handleScan)
+                        }
+                    }
                 }
-                Section(header: Text("Amount")) {
-                    TextField("Amount (sats)", text: $amount)
+                Section(header: Text("Amount (Sats)")) {
+                    TextField("Amount", text: $amount)
+                        .focused($isAmountFocused)
                         .keyboardType(.numberPad)
                         .onReceive(Just(amount)) { newValue in
                             print("new value: \(newValue)")
@@ -55,26 +66,32 @@ struct SendView: View {
                             }
                         }
                 }
-            }.onAppear {UITableView.appearance().backgroundColor = .clear}
+                
+                
+            }
+//            .onAppear {UITableView.appearance().backgroundColor = .clear}
             
             Spacer()
-            BasicButton(action: { self.isShowingScanner = true}, text: "Scan Address")
-            BasicButton(action: {
-                wallet.broadcastTx(recipient: to, amount: (UInt64(amount) ?? 0))
-                presentationMode.wrappedValue.dismiss()
-            }, text: "Broadcast Transaction", color: "Red").disabled(to == "" || (Double(amount) ?? 0) == 0)
             
-//            Button{
-//                wallet.broadcastTx(recipient: to, amount: UInt64(UInt64(amount) ?? 0))
-//            } label: {
-//                PrimaryButton(text: "Broadcast Transaction", background: Color("Send"))
-//            }
-//            .disabled(to == "" || (Double(amount) ?? 0) == 0)
+            VStack(spacing: 10){
+//                Button(action: {self.isShowingScanner = true}){
+//                    PrimaryButton(text: "Scan Address")
+//                }
+//                .sheet(isPresented: $isShowingScanner){
+//                    CodeScannerView(codeTypes: [.qr], simulatedData: "Testing1234", completion: self.handleScan)
+//                }
+                
+                Button(action: {
+                    wallet.broadcastTx(recipient: to, amount: (UInt64(amount) ?? 0))
+                }){
+                    PrimaryButton(text: "Broadcast Transaction", background: .red)
+                }
+                .disabled(to == "" || (Double(amount) ?? 0) == 0)
+            }
             
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("Background"))
     }
 }
 
