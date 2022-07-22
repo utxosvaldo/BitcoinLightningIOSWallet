@@ -124,7 +124,6 @@
 				183C11DE28644B5D0071A291 /* SendView.swift */,
 				18A581CC2886179400FD076B /* NewSendView.swift */,
 				18A581CA2883770100FD076B /* TransactionHistoryView.swift */,
-				18794606288649A900FB6AEC /* SingleTxView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -132,6 +131,7 @@
 		18DDCC4628484C7E0051BBE0 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				18794606288649A900FB6AEC /* SingleTxView.swift */,
 				18DDCC4928484D2F0051BBE0 /* PrimaryButton.swift */,
 				18DDCC54284889920051BBE0 /* BalanceDisplay.swift */,
 				183C11DC286448530071A291 /* BasicButton.swift */,

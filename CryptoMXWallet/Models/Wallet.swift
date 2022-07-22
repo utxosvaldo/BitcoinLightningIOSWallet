@@ -80,7 +80,7 @@ class Wallet: ObservableObject {
     func sync() {
         do {
             print("Syncing ...")
-            try bdkWallet.sync(blockchain: blockchain, progress: nil)
+            try bdkWallet.sync(blockchain: blockchain!, progress: nil)
             balance = try bdkWallet.getBalance()
             balanceText = String(format: "%.8f", Double(balance) / Double(100000000))
             let wallet_transactions = try bdkWallet.getTransactions()

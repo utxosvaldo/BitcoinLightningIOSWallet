@@ -11,12 +11,18 @@ struct TransactionHistoryView: View {
     @EnvironmentObject var wallet: Wallet
     
     var body: some View {
-        ScrollView {
-            if wallet.transactions.isEmpty {
-                Text("No transactions yet.").padding()
-            } else {
-                ForEach(wallet.transactions, id: \.self){ transaction in
-                    SingleTxView(transaction: transaction)
+        VStack{
+            HStack{
+                Text("Transaction History")
+                    .lilacTitle()
+            }
+            ScrollView {
+                if wallet.transactions.isEmpty {
+                    Text("No transactions yet.").padding()
+                } else {
+                    ForEach(wallet.transactions, id: \.self){ transaction in
+                        SingleTxView(transaction: transaction)
+                    }
                 }
             }
         }
