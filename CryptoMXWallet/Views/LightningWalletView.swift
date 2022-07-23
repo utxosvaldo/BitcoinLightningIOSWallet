@@ -24,15 +24,25 @@ struct LightningWalletView: View {
             NavigationLink(destination: TransactionHistoryView()){
                 PrimaryButton(text: "Transaction History")
             }
-            
             HStack{
-                NavigationLink(destination: ReceiveView().environmentObject(wallet)){
+                NavigationLink(destination: WithdrawFundsView().environmentObject(wallet)){
+                    PrimaryButton(text: "Withdraw")
+                }
+                NavigationLink(destination: DepositFundsView().environmentObject(wallet)){
+                    PrimaryButton(text: "Deposit")
+                }
+            
+            }
+            HStack{
+                NavigationLink(destination: ReceiveLightningView().environmentObject(wallet)){
                     PrimaryButton(text: "Receive", background: .green)
                 }
-                NavigationLink(destination: NewSendView().environmentObject(wallet)){
+                NavigationLink(destination: SendLightningView().environmentObject(wallet)){
                     PrimaryButton(text: "Send", background: .red)
                 }
             }
+            
+            
             
             Spacer()
         }

@@ -27,7 +27,7 @@ struct CreateNewWalletView: View {
                     PrimaryButton(text: "Create Wallet")
                 }
                 
-                NavigationLink(destination: WalletView().environmentObject(wallet)){
+                NavigationLink(destination: ImportWalletView().environmentObject(wallet)){
                     PrimaryButton(text: "Import Wallet")
                 }
                 

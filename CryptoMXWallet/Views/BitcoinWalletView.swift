@@ -36,7 +36,7 @@ struct BitcoinWalletView: View {
                 NavigationLink(destination: ReceiveView().environmentObject(wallet)){
                     PrimaryButton(text: "Receive", background: .green)
                 }
-                NavigationLink(destination: NewSendView().environmentObject(wallet)){
+                NavigationLink(destination: SendView().environmentObject(wallet)){
                     PrimaryButton(text: "Send", background: .red)
                 }
             }

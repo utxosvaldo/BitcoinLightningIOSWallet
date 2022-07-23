@@ -10,7 +10,6 @@
 		183C11D9286397BF0071A291 /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11D8286397BF0071A291 /* ReceiveView.swift */; };
 		183C11DB28639CBA0071A291 /* BasicTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11DA28639CBA0071A291 /* BasicTextStyle.swift */; };
 		183C11DD286448530071A291 /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11DC286448530071A291 /* BasicButton.swift */; };
-		183C11DF28644B5D0071A291 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11DE28644B5D0071A291 /* SendView.swift */; };
 		1873A57D288101DC00F21212 /* BitcoinDevKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1873A57C288101DC00F21212 /* BitcoinDevKit */; };
 		1873A581288104AF00F21212 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 1873A580288104AF00F21212 /* CodeScanner */; };
 		18794607288649A900FB6AEC /* SingleTxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18794606288649A900FB6AEC /* SingleTxView.swift */; };
@@ -20,9 +19,14 @@
 		187A3A5B288921370040D7CA /* LightningWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3A5A288921370040D7CA /* LightningWalletView.swift */; };
 		187A3A5D28892E760040D7CA /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3A5C28892E760040D7CA /* Repository.swift */; };
 		187A3A5F28893EC90040D7CA /* CreateNewWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3A5E28893EC90040D7CA /* CreateNewWalletView.swift */; };
+		187A3A61288C51B00040D7CA /* ImportWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3A60288C51B00040D7CA /* ImportWalletView.swift */; };
+		187A3A63288C59140040D7CA /* WithdrawFundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3A62288C59140040D7CA /* WithdrawFundsView.swift */; };
+		187A3A65288C591D0040D7CA /* DepositFundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3A64288C591D0040D7CA /* DepositFundsView.swift */; };
+		187A3A67288C5DDE0040D7CA /* ReceiveLightningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3A66288C5DDE0040D7CA /* ReceiveLightningView.swift */; };
+		187A3A69288C5DE60040D7CA /* SendLightningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187A3A68288C5DE60040D7CA /* SendLightningView.swift */; };
 		18A581C92883759F00FD076B /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A581C82883759F00FD076B /* WalletView.swift */; };
 		18A581CB2883770100FD076B /* TransactionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A581CA2883770100FD076B /* TransactionHistoryView.swift */; };
-		18A581CD2886179400FD076B /* NewSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A581CC2886179400FD076B /* NewSendView.swift */; };
+		18A581CD2886179400FD076B /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A581CC2886179400FD076B /* SendView.swift */; };
 		18DDCC32284847BD0051BBE0 /* CryptoMXWalletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DDCC31284847BD0051BBE0 /* CryptoMXWalletApp.swift */; };
 		18DDCC36284847C00051BBE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18DDCC35284847C00051BBE0 /* Assets.xcassets */; };
 		18DDCC39284847C00051BBE0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18DDCC38284847C00051BBE0 /* Preview Assets.xcassets */; };
@@ -38,7 +42,6 @@
 		183C11D8286397BF0071A291 /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
 		183C11DA28639CBA0071A291 /* BasicTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTextStyle.swift; sourceTree = "<group>"; };
 		183C11DC286448530071A291 /* BasicButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
-		183C11DE28644B5D0071A291 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		18794606288649A900FB6AEC /* SingleTxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTxView.swift; sourceTree = "<group>"; };
 		187946082889139100FB6AEC /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		187A3A56288918B40040D7CA /* bdkTransactionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bdkTransactionExtension.swift; sourceTree = "<group>"; };
@@ -46,9 +49,14 @@
 		187A3A5A288921370040D7CA /* LightningWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningWalletView.swift; sourceTree = "<group>"; };
 		187A3A5C28892E760040D7CA /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		187A3A5E28893EC90040D7CA /* CreateNewWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewWalletView.swift; sourceTree = "<group>"; };
+		187A3A60288C51B00040D7CA /* ImportWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWalletView.swift; sourceTree = "<group>"; };
+		187A3A62288C59140040D7CA /* WithdrawFundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawFundsView.swift; sourceTree = "<group>"; };
+		187A3A64288C591D0040D7CA /* DepositFundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositFundsView.swift; sourceTree = "<group>"; };
+		187A3A66288C5DDE0040D7CA /* ReceiveLightningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveLightningView.swift; sourceTree = "<group>"; };
+		187A3A68288C5DE60040D7CA /* SendLightningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendLightningView.swift; sourceTree = "<group>"; };
 		18A581C82883759F00FD076B /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		18A581CA2883770100FD076B /* TransactionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryView.swift; sourceTree = "<group>"; };
-		18A581CC2886179400FD076B /* NewSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSendView.swift; sourceTree = "<group>"; };
+		18A581CC2886179400FD076B /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		18DDCC2E284847BD0051BBE0 /* CryptoMXWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoMXWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18DDCC31284847BD0051BBE0 /* CryptoMXWalletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMXWalletApp.swift; sourceTree = "<group>"; };
 		18DDCC35284847C00051BBE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,8 +129,12 @@
 				18DDCC4228484C3A0051BBE0 /* ContentView.swift */,
 				187A3A5E28893EC90040D7CA /* CreateNewWalletView.swift */,
 				183C11D8286397BF0071A291 /* ReceiveView.swift */,
-				183C11DE28644B5D0071A291 /* SendView.swift */,
-				18A581CC2886179400FD076B /* NewSendView.swift */,
+				187A3A60288C51B00040D7CA /* ImportWalletView.swift */,
+				18A581CC2886179400FD076B /* SendView.swift */,
+				187A3A62288C59140040D7CA /* WithdrawFundsView.swift */,
+				187A3A64288C591D0040D7CA /* DepositFundsView.swift */,
+				187A3A66288C5DDE0040D7CA /* ReceiveLightningView.swift */,
+				187A3A68288C5DE60040D7CA /* SendLightningView.swift */,
 				18A581CA2883770100FD076B /* TransactionHistoryView.swift */,
 			);
 			path = Views;
@@ -237,14 +249,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				187A3A65288C591D0040D7CA /* DepositFundsView.swift in Sources */,
 				18DDCC502848508F0051BBE0 /* Wallet.swift in Sources */,
+				187A3A61288C51B00040D7CA /* ImportWalletView.swift in Sources */,
 				187946092889139100FB6AEC /* DateExtension.swift in Sources */,
 				18A581CB2883770100FD076B /* TransactionHistoryView.swift in Sources */,
 				187A3A5B288921370040D7CA /* LightningWalletView.swift in Sources */,
 				18794607288649A900FB6AEC /* SingleTxView.swift in Sources */,
-				18A581CD2886179400FD076B /* NewSendView.swift in Sources */,
+				187A3A63288C59140040D7CA /* WithdrawFundsView.swift in Sources */,
+				18A581CD2886179400FD076B /* SendView.swift in Sources */,
 				183C11DB28639CBA0071A291 /* BasicTextStyle.swift in Sources */,
 				18DDCC32284847BD0051BBE0 /* CryptoMXWalletApp.swift in Sources */,
+				187A3A69288C5DE60040D7CA /* SendLightningView.swift in Sources */,
 				187A3A5D28892E760040D7CA /* Repository.swift in Sources */,
 				183C11D9286397BF0071A291 /* ReceiveView.swift in Sources */,
 				187A3A5F28893EC90040D7CA /* CreateNewWalletView.swift in Sources */,
@@ -254,8 +270,8 @@
 				18DDCC4D28484E200051BBE0 /* lilacTitle.swift in Sources */,
 				183C11DD286448530071A291 /* BasicButton.swift in Sources */,
 				187A3A57288918B40040D7CA /* bdkTransactionExtension.swift in Sources */,
+				187A3A67288C5DDE0040D7CA /* ReceiveLightningView.swift in Sources */,
 				18DDCC4A28484D2F0051BBE0 /* PrimaryButton.swift in Sources */,
-				183C11DF28644B5D0071A291 /* SendView.swift in Sources */,
 				18DDCC4328484C3A0051BBE0 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -23,30 +23,6 @@ struct ContentView: View {
         } else {
             CreateNewWalletView().environmentObject(wallet)
         }
-        
-//        NavigationView {
-//            VStack(spacing: 40){
-//                VStack(spacing: 20){
-//                    Text("CryptoMX")
-//                        .lilacTitle()
-//                    Text("wallet")
-//                        .foregroundColor(Color("AccentColor"))
-//                    
-//                }
-//            
-//                
-//                NavigationLink(destination: WalletView().environmentObject(wallet)){
-//                    PrimaryButton(text: "Create Wallet")
-//                }
-//                
-//                NavigationLink(destination: WalletView().environmentObject(wallet)){
-//                    PrimaryButton(text: "Import Wallet")
-//                }
-//                
-//            }
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
-//            .edgesIgnoringSafeArea(.all)
-//        }
     }
 }
 
