@@ -11,7 +11,7 @@ import CoreImage.CIFilterBuiltins
 let context = CIContext()
 let filter = CIFilter.qrCodeGenerator()
 
-struct ReceiveView: View {
+struct oldReceiveView: View {
     @EnvironmentObject var wallet: Wallet
 
     func updateAddress() {
@@ -79,7 +79,7 @@ struct ReceiveView: View {
     }
 }
 
-struct ReceiveView_Previews: PreviewProvider {
+struct oldReceiveView_Previews: PreviewProvider {
     static var previews: some View {
         ReceiveView()
             .environmentObject(Wallet())

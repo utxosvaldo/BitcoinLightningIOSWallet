@@ -8,26 +8,38 @@
 import SwiftUI
 
 struct CreateNewWalletView: View {
-    @EnvironmentObject var wallet: Wallet
+    @EnvironmentObject var stateController: StateController
     
     var body: some View {
         
         NavigationView {
+            Content(createWallet: stateController.createWalletFromScratch)
+        }
+    }
+}
+
+extension CreateNewWalletView {
+    struct Content: View {
+        let createWallet: () -> Void
+        
+        var body: some View {
             VStack(spacing: 40){
                 VStack(spacing: 20){
                     Text("CryptoMX")
                         .lilacTitle()
                     Text("wallet")
                         .foregroundColor(Color("AccentColor"))
-                    
                 }
 
-                
-                NavigationLink(destination: WalletView().environmentObject(wallet)){
+                Button(action: {
+                    createWallet()
+                }){
                     PrimaryButton(text: "Create Wallet")
                 }
                 
-                NavigationLink(destination: ImportWalletView().environmentObject(wallet)){
+                NavigationLink(
+                    destination: ImportWalletView()
+                ){
                     PrimaryButton(text: "Import Wallet")
                 }
                 
@@ -40,6 +52,10 @@ struct CreateNewWalletView: View {
 
 struct CreateNewWalletView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateNewWalletView().environmentObject(Wallet())
+        Group {
+            NavigationView{
+                CreateNewWalletView.Content(createWallet: {})
+            }
+        }
     }
 }

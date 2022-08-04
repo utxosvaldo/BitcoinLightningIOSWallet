@@ -9,21 +9,15 @@ import SwiftUI
 
 @main
 struct CryptoMXWalletApp: App {
-//    @StateObject var wallet = Wallet()
-    @StateObject var wallet: Wallet = Wallet()
+    @StateObject var stateController = StateController()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(wallet)
-                .onAppear(perform: onCreate)
+            if stateController.bitcoinWalletExist {
+                WalletView().environmentObject(stateController)
+            } else {
+                CreateNewWalletView().environmentObject(stateController)
+            }
         }
-    }
-    
-    func onCreate(){
-        // Set path
-        wallet.setPath(pathToSave:NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!)
-        
-        //
     }
 }

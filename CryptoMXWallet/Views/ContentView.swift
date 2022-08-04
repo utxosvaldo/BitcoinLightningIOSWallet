@@ -10,14 +10,9 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var wallet: Wallet
-    let repository: WalletRepository
-    
-    init(){
-        self.repository = WalletRepository()
-    }
+    var repository: WalletRepository = WalletRepository()
     
     var body: some View {
-        
         if repository.doesWalletExist(){
             WalletView().environmentObject(wallet)
         } else {

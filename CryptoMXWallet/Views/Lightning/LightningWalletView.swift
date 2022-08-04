@@ -1,5 +1,5 @@
 //
-//  BitcoinWalletView.swift
+//  LightningWallet.swift
 //  CryptoMXWallet
 //
 //  Created by Osvaldo Rosales Perez on 20/07/22.
@@ -7,22 +7,15 @@
 
 import SwiftUI
 
-struct BitcoinWalletView: View {
+struct LightningWalletView: View {
     @EnvironmentObject var wallet: Wallet
-    
-    func sync() {
-        if wallet.bdkWallet == nil {
-            wallet.createWallet()
-        }
-        wallet.sync()
-    }
     
     var body: some View {
         VStack(spacing: 40) {
-            Text("Bitcoin Wallet").lilacTitle()
+            Text("Lightning Wallet").lilacTitle()
             
             Spacer()
-            BalanceDisplay(balance: wallet.balanceText)
+//            BalanceDisplay(balance: wallet.balanceText)
             
             Button(action: wallet.sync){
                 PrimaryButton(text: "Sync wallet")
@@ -31,28 +24,37 @@ struct BitcoinWalletView: View {
             NavigationLink(destination: TransactionHistoryView()){
                 PrimaryButton(text: "Transaction History")
             }
-            
             HStack{
-                NavigationLink(destination: ReceiveView().environmentObject(wallet)){
+                NavigationLink(destination: WithdrawFundsView().environmentObject(wallet)){
+                    PrimaryButton(text: "Withdraw")
+                }
+                NavigationLink(destination: DepositFundsView().environmentObject(wallet)){
+                    PrimaryButton(text: "Deposit")
+                }
+            
+            }
+            HStack{
+                NavigationLink(destination: ReceiveLightningView().environmentObject(wallet)){
                     PrimaryButton(text: "Receive", background: .green)
                 }
-                NavigationLink(destination: SendView().environmentObject(wallet)){
+                NavigationLink(destination: SendLightningView().environmentObject(wallet)){
                     PrimaryButton(text: "Send", background: .red)
                 }
             }
             
+            
+            
             Spacer()
         }
+        .navigationBarHidden(true)
         .padding()
         .onAppear(perform: sync)
     }
 }
-        
 
-struct BitcoinWalletView_Previews: PreviewProvider {
-    
+struct LightningWalletView_Previews: PreviewProvider {
     static var previews: some View {
-        BitcoinWalletView()
+        LightningWalletView()
             .environmentObject(Wallet())
     }
 }

@@ -8,20 +8,18 @@
 import SwiftUI
 
 struct WalletView: View {
-    @EnvironmentObject var wallet: Wallet
+    @EnvironmentObject var stateController: StateController
     
     var body: some View {
         VStack{
             TabView {
                 BitcoinWalletView()
-                    .environmentObject(wallet)
-                    .navigationBarHidden(true)
+                    .environmentObject(stateController)
                     .tabItem {
                         Label("Bitcoin", systemImage: "bitcoinsign.circle")
                     }
-                LightningWalletView()
-                    .environmentObject(wallet)
-                    .navigationBarHidden(true)
+                BitcoinWalletView()
+                    .environmentObject(stateController)
                     .tabItem {
                         Label("Lightning", systemImage: "bolt.circle")
                     }
@@ -34,6 +32,6 @@ struct WalletView: View {
 struct WalletView_Previews: PreviewProvider {
     static var previews: some View {
         WalletView()
-            .environmentObject(Wallet())
+            .environmentObject(StateController())
     }
 }

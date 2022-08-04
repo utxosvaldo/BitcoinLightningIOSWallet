@@ -19,10 +19,28 @@ class Wallet: ObservableObject {
     @Published private(set) var latestAddress = "Generate new address"
     @Published private(set) var newAddress = "Generate new address"
     @Published private(set) var transactions: [BitcoinDevKit.Transaction] = []
+    private var repository: WalletRepository = WalletRepository()
 
+    
+//    init() {
+//        self.setPath(pathToSave:NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!)
+//        
+////        if repository.doesWalletExist() {
+////            loadExistingBitcoinWallet()
+////        }
+//    }
+    
     func setPath(pathToSave: String) {
         path = pathToSave
     }
+    
+//    func loadExistingWallet() {
+//        let initialWalletData: RequiredInitialData = repository.getInitialWalletData()
+//        print("Loading existing wallet, descriptor is \(initialWalletData.descriptor)")
+//        print("Loading existing wallet, change descriptor is \(initialWalletData.changeDescriptor)")
+//        
+//        initialize(descriptor: initialWalletData.descriptor, changeDescriptor: initialWalletData.changeDescriptor)
+//    }
     
     private func initialize(descriptor: String, changeDescriptor: String) {
         let electrum = ElectrumConfig(url: electrumURL, socks5: nil, retry: 5, timeout: nil, stopGap: 10)
@@ -49,10 +67,15 @@ class Wallet: ObservableObject {
             let descriptor: String = createDescriptor(keys: keys)
             let changeDescriptor: String = createChangeDescriptor(keys: keys)
             
+            
+            print("Creating wallet, descriptor is \(descriptor)")
+            print("Creating wallet, change descriptor is \(changeDescriptor)")
+            print("Creating wallet, mnemonic is: \(keys.mnemonic)")
+            
             initialize(descriptor: descriptor, changeDescriptor: changeDescriptor)
             
-            // Repository.saveWallet(path, descriptor, change descriptor)
-            // Respository.saveMnemonic(keys.mnemonic)
+            repository.saveWallet(path: path, descriptor: descriptor, changeDescriptor: changeDescriptor)
+            repository.saveMnemonic(mnemonic: keys.mnemonic)
             
         } catch let error {
             print(error)
