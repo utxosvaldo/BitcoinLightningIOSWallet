@@ -10,21 +10,13 @@ import BitcoinDevKit
 import UIKit
 
 struct BitcoinWallet {
-//    let name: String
     var balance: UInt64
     var lastUnusedAddress: String
     var transactions: [BitcoinDevKit.Transaction]
-    
     var balanceText: String {
         String(format: "%.8f", Double(balance) / Double(100000000))
     }
-    
-    var lastUnusedAddressQR: UIImage {
-        
-        return UIImage(systemName: "xmark.circle") ?? UIImage()
-    }
 }
-
 
 extension BitcoinDevKit.Transaction {
     public func getDetails() -> TransactionDetails {

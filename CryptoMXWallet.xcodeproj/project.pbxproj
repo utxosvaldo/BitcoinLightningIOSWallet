@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1809E233289C93E600033CA3 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809E232289C93E600033CA3 /* SendView.swift */; };
 		1809E237289D8B5800033CA3 /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809E236289D8B5800033CA3 /* DoneButton.swift */; };
+		1809E23B289DD90600033CA3 /* LightningWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809E23A289DD90600033CA3 /* LightningWallet.swift */; };
 		1824D0BD289B6233001C3F57 /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824D0BC289B6233001C3F57 /* ReceiveView.swift */; };
 		1824D0BF289B71CF001C3F57 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824D0BE289B71CF001C3F57 /* Formatting.swift */; };
 		183C11DB28639CBA0071A291 /* BasicTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11DA28639CBA0071A291 /* BasicTextStyle.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		1809E232289C93E600033CA3 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		1809E236289D8B5800033CA3 /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
+		1809E23A289DD90600033CA3 /* LightningWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningWallet.swift; sourceTree = "<group>"; };
 		1824D0BC289B6233001C3F57 /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
 		1824D0BE289B71CF001C3F57 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		183C11D72863856A0071A291 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = ../MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -194,6 +196,7 @@
 				18A089CD28999E680040D131 /* BitcoinWallet.swift */,
 				18A089D6289A08DC0040D131 /* TestData.swift */,
 				1824D0BE289B71CF001C3F57 /* Formatting.swift */,
+				1809E23A289DD90600033CA3 /* LightningWallet.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				1824D0BF289B71CF001C3F57 /* Formatting.swift in Sources */,
 				18DDCC55284889920051BBE0 /* BalanceDisplay.swift in Sources */,
 				18DDCC4D28484E200051BBE0 /* lilacTitle.swift in Sources */,
+				1809E23B289DD90600033CA3 /* LightningWallet.swift in Sources */,
 				18A089D32899B7FC0040D131 /* StateController.swift in Sources */,
 				183C11DD286448530071A291 /* BasicButton.swift in Sources */,
 				18DDCC4A28484D2F0051BBE0 /* PrimaryButton.swift in Sources */,

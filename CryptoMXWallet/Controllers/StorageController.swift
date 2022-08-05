@@ -10,23 +10,6 @@ import Foundation
 class StorageController {
     private let userDefaults: UserDefaults = UserDefaults.standard
     
-//    func saveValue(forKey key: String, value: Any) {
-//        self.userDefaults.set(value, forKey: key)
-//    }
-    
-//    func readValue (forKey key: String) -> String {
-//        let savedValue = self.userDefaults.value(forKey: key)
-//        return String(describing: savedValue)
-//    }
-//
-//    func updateValue(forKey key: String, value: String) {
-//        self.userDefaults.set(value, forKey: key)
-//    }
-//
-//    func deleteValue(forKey key: String) {
-//        self.userDefaults.removeObject(forKey: key)
-//    }
-    
     func doesBitcoinWalletExist() -> Bool {
         return self.userDefaults.value(forKey: "bitcoinWalletInitialized") as? Bool ?? false
     }
