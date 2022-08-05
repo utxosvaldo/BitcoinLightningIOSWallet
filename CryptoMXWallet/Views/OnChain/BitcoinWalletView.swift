@@ -32,9 +32,9 @@ extension BitcoinWalletView {
                     PrimaryButton(text: "Sync wallet")
                 }
                 
-    //            NavigationLink(destination: TransactionHistoryView()){
+                NavigationLink(destination: TransactionHistoryView()){
                     PrimaryButton(text: "Transaction History")
-    //            }
+                }
                 
                 HStack{
                     NavigationLink(destination: ReceiveView()){

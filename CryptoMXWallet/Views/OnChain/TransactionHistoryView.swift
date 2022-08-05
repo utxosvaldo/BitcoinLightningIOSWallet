@@ -6,22 +6,33 @@
 //
 
 import SwiftUI
+import BitcoinDevKit
 
 struct TransactionHistoryView: View {
-    @EnvironmentObject var wallet: Wallet
+    @EnvironmentObject private var stateController: StateController
     
     var body: some View {
-        VStack{
-            HStack{
-                Text("Transaction History")
-                    .lilacTitle()
-            }
-            ScrollView {
-                if wallet.transactions.isEmpty {
-                    Text("No transactions yet.").padding()
-                } else {
-                    ForEach(wallet.transactions, id: \.self){ transaction in
-                        SingleTxView(transaction: transaction)
+        Content(transactions: stateController.bitcoinWallet.transactions)
+    }
+}
+
+extension TransactionHistoryView {
+    struct Content: View {
+        let transactions: [BitcoinDevKit.Transaction]
+        
+        var body: some View {
+            VStack{
+                HStack{
+                    Text("Transaction History")
+                        .lilacTitle()
+                }
+                ScrollView {
+                    if transactions.isEmpty {
+                        Text("No transactions yet.").padding()
+                    } else {
+                        ForEach(transactions, id: \.self){ transaction in
+                            SingleTxView(transaction: transaction)
+                        }
                     }
                 }
             }
@@ -31,7 +42,8 @@ struct TransactionHistoryView: View {
 
 struct TransactionHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        TransactionHistoryView()
-            .environmentObject(Wallet())
+        Group {
+            TransactionHistoryView.Content(transactions: TestData.transactions)
+        }
     }
 }

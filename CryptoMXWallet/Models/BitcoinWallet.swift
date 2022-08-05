@@ -25,6 +25,7 @@ struct BitcoinWallet {
     }
 }
 
+
 extension BitcoinDevKit.Transaction {
     public func getDetails() -> TransactionDetails {
         switch self {
