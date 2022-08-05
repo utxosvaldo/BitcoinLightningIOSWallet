@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1809E233289C93E600033CA3 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809E232289C93E600033CA3 /* SendView.swift */; };
+		1809E237289D8B5800033CA3 /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809E236289D8B5800033CA3 /* DoneButton.swift */; };
+		1809E239289D911D00033CA3 /* ScanningQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809E238289D911D00033CA3 /* ScanningQRView.swift */; };
 		1824D0BD289B6233001C3F57 /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824D0BC289B6233001C3F57 /* ReceiveView.swift */; };
 		1824D0BF289B71CF001C3F57 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824D0BE289B71CF001C3F57 /* Formatting.swift */; };
 		183C11D9286397BF0071A291 /* oldReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11D8286397BF0071A291 /* oldReceiveView.swift */; };
@@ -44,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		1809E232289C93E600033CA3 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
+		1809E236289D8B5800033CA3 /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
+		1809E238289D911D00033CA3 /* ScanningQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanningQRView.swift; sourceTree = "<group>"; };
 		1824D0BC289B6233001C3F57 /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
 		1824D0BE289B71CF001C3F57 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		183C11D72863856A0071A291 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = ../MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -109,6 +113,7 @@
 				1809E232289C93E600033CA3 /* SendView.swift */,
 				187A3A58288920790040D7CA /* BitcoinWalletView.swift */,
 				18A581CA2883770100FD076B /* TransactionHistoryView.swift */,
+				1809E238289D911D00033CA3 /* ScanningQRView.swift */,
 			);
 			path = OnChain;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 				18DDCC4928484D2F0051BBE0 /* PrimaryButton.swift */,
 				18DDCC54284889920051BBE0 /* BalanceDisplay.swift */,
 				183C11DC286448530071A291 /* BasicButton.swift */,
+				1809E236289D8B5800033CA3 /* DoneButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -292,7 +298,9 @@
 				18DDCC502848508F0051BBE0 /* Wallet.swift in Sources */,
 				187A3A61288C51B00040D7CA /* ImportWalletView.swift in Sources */,
 				1809E233289C93E600033CA3 /* SendView.swift in Sources */,
+				1809E239289D911D00033CA3 /* ScanningQRView.swift in Sources */,
 				187946092889139100FB6AEC /* DateExtension.swift in Sources */,
+				1809E237289D8B5800033CA3 /* DoneButton.swift in Sources */,
 				1824D0BD289B6233001C3F57 /* ReceiveView.swift in Sources */,
 				18A089D12899A9540040D131 /* StorageController.swift in Sources */,
 				18A581CB2883770100FD076B /* TransactionHistoryView.swift in Sources */,

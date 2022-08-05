@@ -115,32 +115,27 @@ class StateController: ObservableObject {
     private func createDescriptor(keys: ExtendedKeyInfo) -> String {
         let descriptor: String = "wpkh(\(keys.xprv)/84'/1'/0'/0/*)"
         print("descriptor: \(descriptor)")
-        
-        // for debugging
-//        descriptor = "wpkh(tprv8ZgxMBicQKsPdiCqH6nHDmXm6SL2TFkWS5T5jaZqa8hEPHWj9jjXL51z2jNWXsfiDzhNfBWKSmgS2ue9UnWEGX4Ej8SKE52PV1GDtmyyXVk/84'/1'/0'/0/*)"
         return descriptor
     }
     
     private func createChangeDescriptor(keys: ExtendedKeyInfo) -> String {
         let changeDescriptor: String = "wpkh(\(keys.xprv)/84'/1'/0'/1/*)"
         print("change descriptor: \(changeDescriptor)")
-        
-        // for debugging
-//        changeDescriptor = "wpkh(tprv8ZgxMBicQKsPdiCqH6nHDmXm6SL2TFkWS5T5jaZqa8hEPHWj9jjXL51z2jNWXsfiDzhNfBWKSmgS2ue9UnWEGX4Ej8SKE52PV1GDtmyyXVk/84'/1'/0'/1/*)"
         return changeDescriptor
     }
     
-    func generateQRCode(from string: String) -> UIImage {
-        let data = Data(string.utf8)
-        filter.setValue(data, forKey: "inputMessage")
-        
-        if let outputImage = filter.outputImage {
-            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent){
-                return UIImage(cgImage: cgimg)
-            }
+    func broadcastTx(recipient: String, amount: UInt64) {
+        do{
+            let txBuilder = TxBuilder().addRecipient(address: recipient, amount: amount)
+            
+            let psbt = try txBuilder.finish(wallet: bdkWallet)
+            try bdkWallet.sign(psbt: psbt)
+            try blockchain.broadcast(psbt: psbt)
+            let txid = psbt.txid()
+            print("Transaction Id: \(txid)")
+        } catch let error {
+            print(error)
         }
-        
-        return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
     
 }

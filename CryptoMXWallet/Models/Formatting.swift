@@ -33,4 +33,8 @@ extension String {
             String(self.suffix(length/2))
         ]
     }
+    
+    var toUInt64: UInt64 {
+        return UInt64(self) ?? 0
+    }
 }
