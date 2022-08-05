@@ -41,9 +41,9 @@ extension BitcoinWalletView {
                         PrimaryButton(text: "Receive", background: .green)
                     }
 
-    //                NavigationLink(destination: SendView().environmentObject(wallet)){
+                    NavigationLink(destination: SendView()){
                     PrimaryButton(text: "Send", background: .red)
-    //                }
+                    }
                 }
                 
                 Spacer()
