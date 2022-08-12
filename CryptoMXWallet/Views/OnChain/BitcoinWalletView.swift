@@ -12,7 +12,7 @@ struct BitcoinWalletView: View {
     
     var body: some View {
         NavigationView {
-            Content(balanceText: stateController.bitcoinWallet.balanceText, sync: stateController.sync)
+            Content(balanceText: stateController.bitcoinController.wallet.balanceText, sync: stateController.bitcoinController.sync)
         }
     }
 }

@@ -18,7 +18,7 @@ struct WalletView: View {
                     .tabItem {
                         Label("Bitcoin", systemImage: "bitcoinsign.circle")
                     }
-                BitcoinWalletView()
+                StartLightningWalletView()
                     .environmentObject(stateController)
                     .tabItem {
                         Label("Lightning", systemImage: "bolt.circle")

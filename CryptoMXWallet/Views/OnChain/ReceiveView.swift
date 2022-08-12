@@ -11,7 +11,7 @@ struct ReceiveView: View {
     @EnvironmentObject private var stateController: StateController
     
     var body: some View {
-        Content(receiveAddress: stateController.bitcoinWallet.lastUnusedAddress)
+        Content(receiveAddress: stateController.bitcoinController.wallet.lastUnusedAddress)
     }
 }
 
@@ -43,9 +43,6 @@ extension ReceiveView {
                                 Text("Copy Address to clipboard")
                             }
                     }
-//                    .onTapGesture {
-//                        UIPasteboard.general.string = receiveAddress
-//                    }
                 
                 Spacer()
                 

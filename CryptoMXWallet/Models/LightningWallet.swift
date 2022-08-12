@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct LNWallet {
-    let id: String
+struct LightningWallet {
+    let ibexAccount: IbexAccount
     var balance: UInt64
     var transactions: [LNTransaction]
     var balanceText: String {
@@ -16,6 +16,19 @@ struct LNWallet {
     }
 }
 
-struct LNTransaction {
-    let amount: UInt64
+struct LNTransaction: Codable, Identifiable {
+    let id = UUID()
+    var amountMsat: UInt64
+    var bolt11: String
+    var creationDateUtc: String
+    var feeMsat: UInt64
+    var hash: String
+    var memo: String
+    var settleDateUtc: String
+}
+
+struct IbexAccount: Codable {
+    var id: String
+    var userId: String
+    var name: String
 }

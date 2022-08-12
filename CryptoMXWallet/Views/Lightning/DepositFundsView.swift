@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 
 struct DepositFundsView: View {
-    @EnvironmentObject var wallet: Wallet
     @State var amount: String = ""
     @State var showDepositAlert: Bool = false
     @FocusState private var isAmountFocused: Bool

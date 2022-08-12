@@ -43,7 +43,7 @@ struct SendView: View {
     }
     
     func broadcastTx() {
-        stateController.broadcastTx(recipient: to, amount: amount.toUInt64)
+        stateController.bitcoinController.broadcastTx(recipient: to, amount: amount.toUInt64)
         showBroadcastAlert = false
     }
 }

@@ -14,6 +14,10 @@ class StorageController {
         return self.userDefaults.value(forKey: "bitcoinWalletInitialized") as? Bool ?? false
     }
     
+    func doesLightningWalletExist() -> Bool {
+        return self.userDefaults.value(forKey: "lightningWalletInitialized") as? Bool ?? false
+    }
+    
     func saveBitcoinWallet(path: String, descriptor: String, changeDescriptor: String){
         self.userDefaults.set(true, forKey: "bitcoinWalletInitialized")
         self.userDefaults.set(path, forKey: "path")
@@ -24,6 +28,13 @@ class StorageController {
     func saveMnemonic(mnemonic: String) {
         print("Recovery phrase is: \(mnemonic)")
         self.userDefaults.set(mnemonic, forKey: "mnemonic")
+    }
+    
+    func saveLightningWallet(id: String, userId: String, name: String){
+        self.userDefaults.set(true, forKey: "lightningWalletInitialized")
+        self.userDefaults.set(id, forKey: "id")
+        self.userDefaults.set(userId, forKey: "userId")
+        self.userDefaults.set(name, forKey: "name")
     }
     
     func fetchInitialWalletData() -> RequiredInitialData {
