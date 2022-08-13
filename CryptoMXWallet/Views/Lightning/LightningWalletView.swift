@@ -12,27 +12,25 @@ struct LightningWalletView: View {
     
     var body: some View {
         NavigationView {
-            Content(balanceText: stateController.lightningController.wallet.balanceSats, sync: sync)
+            Content(balance:stateController.lightningWallet.balanceBtc, sync: sync)
         }
     }
     
     func sync() {
-        Task {
-            await stateController.lightningController.sync()
-        }
+        stateController.syncLightning()
     }
 }
 
 extension LightningWalletView {
     struct Content: View {
-        var balanceText: String
+        var balance: String
         let sync: () -> Void
         
         var body: some View {
             VStack(spacing: 10) {
                 
                 Spacer()
-                BalanceDisplay(balanceText: balanceText)
+                BalanceDisplay(balanceText: balance)
                 
                 Button(action: sync){
                     PrimaryButton(text: "Sync wallet")
@@ -76,7 +74,7 @@ struct LightningWalletView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                LightningWalletView.Content(balanceText: TestData.bitcoinWallet.balanceText, sync: {})
+                LightningWalletView.Content(balance: TestData.lightningWallet.balanceBtc, sync: {})
             }
         }
     }

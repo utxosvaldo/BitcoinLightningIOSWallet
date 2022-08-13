@@ -20,7 +20,6 @@ struct StartLightningWalletView: View {
 
 extension StartLightningWalletView {
     struct Content: View {
-//        let createWallet: () -> Void
         
         var body: some View {
             VStack(spacing: 40){

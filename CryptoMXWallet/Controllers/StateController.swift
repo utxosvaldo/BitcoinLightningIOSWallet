@@ -15,9 +15,8 @@ class StateController: ObservableObject {
     @Published var lightningWalletExists: Bool
     @Published var bitcoinWallet: BitcoinWallet!
     @Published var lightningWallet: LightningWallet!
-    private(set) var lightningController: LightningController!
+    private(set) var lightningController = LightningController()
     private(set) var bitcoinController = BitcoinController()
-    private let ibexHubAPI = IbexHubAPI()
     private let storageController = StorageController()
     
     init() {
@@ -33,8 +32,7 @@ class StateController: ObservableObject {
     
     func loadExistingBitcoinWallet(){
         let initialWalletData: RequiredInitialData = storageController.fetchInitialWalletData()
-        print("Loading existing wallet, descriptor is \(initialWalletData.descriptor)")
-        print("Loading existing wallet, change descriptor is \(initialWalletData.changeDescriptor)")
+        print("Loading existing bitcoin wallet with \(initialWalletData)")
         
         do {
             bitcoinWallet = try bitcoinController.loadWallet(initialWalletData: initialWalletData)
@@ -72,7 +70,19 @@ class StateController: ObservableObject {
         }
     }
     
-    func sync() {
+    func broadcastTx(recipient: String, amount: UInt64) {
+        do {
+            let txid:String = try bitcoinController.broadcastTx(recipient: recipient, amount: amount)
+            print("Sent: \(amount) Sats")
+            print("To: \(recipient)")
+            print("TxId: \(txid)")
+        }
+        catch let error {
+            print("Error while broadcasting transaction: \(error)")
+        }
+    }
+    
+    func syncBitcoin() {
         Task {
             print("Syncing Bitcoin wallet...")
             do {
@@ -88,46 +98,75 @@ class StateController: ObservableObject {
         }
     }
     
-    func broadcastTx(recipient: String, amount: UInt64) {
-        do {
-            let txid:String = try bitcoinController.broadcastTx(recipient: recipient, amount: amount)
-            print("Sent: \(amount) Sats")
-            print("To: \(recipient)")
-            print("TxId: \(txid)")
-        }
-        catch let error {
-            print("Error while broadcasting transaction: \(error)")
-        }
-    }
-    
-    private func loadExistingLightningWallet() {
-        let initialWalletData: RequiredInitialLightningData = storageController.fetchInitialLightningWalletData()
-        print("Loading existing lightning wallet with \(initialWalletData)")
-        lightningController = LightningController(id: initialWalletData.id, name: initialWalletData.name)
-    }
-    
-    func createLightningWallet(name: String) async {
-        do{
-            let ibexAccount = try await ibexHubAPI.createIbexAccount(name: name)
-            print("Created ibex account: \(String(describing: ibexAccount))")
-            
-            lightningController = LightningController(id: ibexAccount.id, name: ibexAccount.name)
-            DispatchQueue.main.async {
-                self.lightningWalletExists = true
-                
+    func syncLightning() {
+        if lightningWalletExists {
+            Task {
+                print("Syncing Lightning wallet...")
+                do {
+                    let syncedLightningWallet = try await lightningController.sync()
+                    DispatchQueue.main.async {
+                        self.lightningWallet = syncedLightningWallet
+                    }
+                    print("Lightning wallet synced! Balance: \(self.lightningWallet.balanceSats)")
+                }
+                catch let error {
+                    print("Error while syncing lightning wallet: \(error)")
+                }
             }
         }
-        catch let error{
-            print("Error while creating ibex account: \(error)")
-        }
-        
     }
     
+    func loadExistingLightningWallet() {
+        let initialWalletData: RequiredInitialLightningData = storageController.fetchInitialLightningWalletData()
+        print("Loading existing lightning wallet with \(initialWalletData)")
+        
+        Task {
+            do{
+                let loadedLightningWallet = try await lightningController.loadWallet(id: initialWalletData.id)
+                
+                DispatchQueue.main.async {
+                    self.lightningWallet = loadedLightningWallet
+                    self.lightningWalletExists = true
+                }
+            }
+            catch let error{
+                print("Error while loading lightning wallet: \(error)")
+            }
+        }
+    }
 
     
-    func importLightningWallet(id: String, name: String) {
-        lightningController = LightningController(id: id, name: name)
-        lightningWalletExists = true
-        storageController.saveLightningWallet(id: id, name: name)
+    func createLightningWallet(name: String) {
+        Task {
+            do{
+                let newLightningWallet = try await lightningController.createWallet(name: name)
+                
+                DispatchQueue.main.async {
+                    self.lightningWallet = newLightningWallet
+                    self.lightningWalletExists = true
+                    self.storageController.saveLightningWallet(id: self.lightningWallet.id, name: self.lightningWallet.name)
+                }
+            }
+            catch let error{
+                print("Error while creating lightning wallet: \(error)")
+            }
+        }
+    }
+    
+    func importLightningWallet(id: String) {
+        Task {
+            do{
+                let importedLightningWallet = try await lightningController.loadWallet(id: id)
+                
+                DispatchQueue.main.async {
+                    self.lightningWallet = importedLightningWallet
+                    self.lightningWalletExists = true
+                }
+                storageController.saveLightningWallet(id: lightningWallet.id, name: lightningWallet.name)
+            }
+            catch let error{
+                print("Error while creating lightning wallet: \(error)")
+            }
+        }
     }
 }

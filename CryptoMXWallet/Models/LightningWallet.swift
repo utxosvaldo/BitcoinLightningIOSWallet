@@ -13,10 +13,10 @@ struct LightningWallet {
     var balanceMsats: UInt64?
     var transactions: [LNTransaction]?
     var balanceSats: String {
-        String(format: "%.8f", Double(balanceMsats ?? 0) / Double(1000))
+        String(format: "%.3f", Double(balanceMsats ?? 0) / Double(1000))
     }
     var balanceBtc: String {
-        String(format: "%.8f", Double(balanceMsats ?? 0) / Double(1000000000000))
+        String(format: "%.8f", Double(balanceMsats ?? 0) / Double(1000) / Double(100000000))
     }
 }
 

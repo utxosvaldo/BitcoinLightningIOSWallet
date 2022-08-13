@@ -17,7 +17,7 @@ struct BitcoinWalletView: View {
     }
     
     func sync() {
-        stateController.sync()
+        stateController.syncBitcoin()
     }
 }
 

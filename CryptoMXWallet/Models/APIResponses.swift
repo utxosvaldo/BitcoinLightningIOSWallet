@@ -9,11 +9,13 @@ import Foundation
 
 struct IbexAccount: Codable {
     var id: String
-    var userId: String
     var name: String
-    var balanceMsats: UInt64?
-    var bitcoinAddresses: [String]?
-    var lightningAddresses: [String]?
+}
+
+struct IbexAccountDetails: Codable {
+    var id: String
+    var name: String
+    var balanceMsat: UInt64
 }
 
 struct LNTransaction: Codable {
@@ -31,3 +33,33 @@ struct LNInvoice: Codable {
     var hash: String
     var expirationUTC: UInt64
 }
+
+struct LNInvoiceReceipt: Codable {
+    var settleTimeUTC: String
+    var hash: String
+    var amountMsat: UInt64
+    var feesMsat: UInt64
+}
+
+struct LNInvoiceDetails: Codable {
+    var id: UInt64
+    var hash: String
+    var bolt11: String
+    var preImage: String?
+    var memo: String
+    var creationDateUtc: String
+    var expiryDateUtc: String
+    var settleDateUtc: String?
+    var amountMsat: UInt64
+    var receiveMsat: UInt64
+    var stateId: Int
+    var state: LNInvoiceState
+    
+}
+
+struct LNInvoiceState: Codable {
+    var id: UInt
+    var name: String
+    var description: String?
+}
+

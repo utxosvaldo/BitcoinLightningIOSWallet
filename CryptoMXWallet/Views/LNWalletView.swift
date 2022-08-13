@@ -22,9 +22,9 @@ extension LNWalletView {
         var body: some View {
             VStack{
                 if walletExists {
-                    LightningWalletView()//.environmentObject(stateController)
+                    LightningWalletView()
                 } else {
-                    StartLightningWalletView()//.environmentObject(stateController)
+                    StartLightningWalletView()
                 }
             }
         }

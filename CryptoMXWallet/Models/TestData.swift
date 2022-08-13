@@ -16,4 +16,6 @@ struct TestData {
     static let transactions: [Transaction] = [unconfirmedTx, confirmedTx]
     
     static let bitcoinWallet = BitcoinWallet(balance: UInt64(42069000), lastUnusedAddress: "bc1qazusyn5ct7xah375k0z6l6w7qphg6vp7pau0p8", transactions: transactions)
+    
+    static let lightningWallet = LightningWallet(id: "ab124d8a-f9b8-401e-87f0-f8bbc8188156", name: "My Lightning Wallet", balanceMsats: 123456000, transactions: [])
 }

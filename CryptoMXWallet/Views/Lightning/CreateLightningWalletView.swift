@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CreateLightningWalletView: View {
-//    @EnvironmentObject var wallet: Wallet
     @EnvironmentObject private var stateController: StateController
     @State var name: String = ""
     
@@ -17,9 +16,7 @@ struct CreateLightningWalletView: View {
     }
     
     func createWallet() {
-        Task {
-            await stateController.createLightningWallet(name: name)
-        }
+        stateController.createLightningWallet(name: name)
     }
 }
 
@@ -46,13 +43,10 @@ extension CreateLightningWalletView {
                 Spacer()
                 
                 VStack(spacing: 10){
-                    
-                    
                     Button(action: createWallet){
                         PrimaryButton(text: "Create Wallet", background: .blue)
                     }
                 }
-                
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -63,7 +57,7 @@ extension CreateLightningWalletView {
 struct CreateLightningWalletView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CreateLightningWalletView.Content(name: .constant("Test Lightning Wallet"), createWallet: {})
+            CreateLightningWalletView.Content(name: .constant(TestData.lightningWallet.name), createWallet: {})
         }
     }
 }
