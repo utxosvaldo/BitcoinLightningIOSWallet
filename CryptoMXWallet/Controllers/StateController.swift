@@ -16,7 +16,7 @@ class StateController: ObservableObject {
     @Published var bitcoinWallet: BitcoinWallet!
     @Published var lightningWallet: LightningWallet!
     private(set) var lightningController: LightningController!
-    private(set) var bitcoinController = newBitcoinController()
+    private(set) var bitcoinController = BitcoinController()
     private let ibexHubAPI = IbexHubAPI()
     private let storageController = StorageController()
     

@@ -13,7 +13,6 @@
 		1824D0BF289B71CF001C3F57 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824D0BE289B71CF001C3F57 /* Formatting.swift */; };
 		183C11DB28639CBA0071A291 /* BasicTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11DA28639CBA0071A291 /* BasicTextStyle.swift */; };
 		186B293A28A0D1EF0023D544 /* LightningController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B293928A0D1EF0023D544 /* LightningController.swift */; };
-		186B293C28A0DA420023D544 /* BitcoinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B293B28A0DA420023D544 /* BitcoinController.swift */; };
 		1873A57D288101DC00F21212 /* BitcoinDevKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1873A57C288101DC00F21212 /* BitcoinDevKit */; };
 		1873A581288104AF00F21212 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 1873A580288104AF00F21212 /* CodeScanner */; };
 		18794607288649A900FB6AEC /* SingleTxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18794606288649A900FB6AEC /* SingleTxView.swift */; };
@@ -26,7 +25,7 @@
 		1880C14828A6ED320048D9BC /* APIResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880C14728A6ED320048D9BC /* APIResponses.swift */; };
 		1880C14A28A715590048D9BC /* ImportLightningWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880C14928A715590048D9BC /* ImportLightningWalletView.swift */; };
 		1880C14C28A71C100048D9BC /* LNWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880C14B28A71C100048D9BC /* LNWalletView.swift */; };
-		1880C14E28A7F6AC0048D9BC /* newBitcoinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880C14D28A7F6AC0048D9BC /* newBitcoinController.swift */; };
+		1880C14E28A7F6AC0048D9BC /* BitcoinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880C14D28A7F6AC0048D9BC /* BitcoinController.swift */; };
 		18823C7028A44D3100D3572E /* IbexHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18823C6F28A44D3100D3572E /* IbexHubAPI.swift */; };
 		18823C7328A6AECE00D3572E /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18823C7228A6AECE00D3572E /* NetworkRequest.swift */; };
 		18823C7528A6D29100D3572E /* StartLightningWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18823C7428A6D29100D3572E /* StartLightningWalletView.swift */; };
@@ -53,7 +52,6 @@
 		1824D0BE289B71CF001C3F57 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		183C11DA28639CBA0071A291 /* BasicTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTextStyle.swift; sourceTree = "<group>"; };
 		186B293928A0D1EF0023D544 /* LightningController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningController.swift; sourceTree = "<group>"; };
-		186B293B28A0DA420023D544 /* BitcoinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinController.swift; sourceTree = "<group>"; };
 		18794606288649A900FB6AEC /* SingleTxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTxView.swift; sourceTree = "<group>"; };
 		187A3A58288920790040D7CA /* BitcoinWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinWalletView.swift; sourceTree = "<group>"; };
 		187A3A5A288921370040D7CA /* LightningWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningWalletView.swift; sourceTree = "<group>"; };
@@ -64,7 +62,7 @@
 		1880C14728A6ED320048D9BC /* APIResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponses.swift; sourceTree = "<group>"; };
 		1880C14928A715590048D9BC /* ImportLightningWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportLightningWalletView.swift; sourceTree = "<group>"; };
 		1880C14B28A71C100048D9BC /* LNWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LNWalletView.swift; sourceTree = "<group>"; };
-		1880C14D28A7F6AC0048D9BC /* newBitcoinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newBitcoinController.swift; sourceTree = "<group>"; };
+		1880C14D28A7F6AC0048D9BC /* BitcoinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinController.swift; sourceTree = "<group>"; };
 		18823C6F28A44D3100D3572E /* IbexHubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IbexHubAPI.swift; sourceTree = "<group>"; };
 		18823C7128A59D1600D3572E /* ibexapi.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ibexapi.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		18823C7228A6AECE00D3572E /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
@@ -105,8 +103,7 @@
 				18A089D02899A9540040D131 /* StorageController.swift */,
 				18A089D22899B7FC0040D131 /* StateController.swift */,
 				186B293928A0D1EF0023D544 /* LightningController.swift */,
-				186B293B28A0DA420023D544 /* BitcoinController.swift */,
-				1880C14D28A7F6AC0048D9BC /* newBitcoinController.swift */,
+				1880C14D28A7F6AC0048D9BC /* BitcoinController.swift */,
 				18823C6F28A44D3100D3572E /* IbexHubAPI.swift */,
 				18823C7228A6AECE00D3572E /* NetworkRequest.swift */,
 			);
@@ -307,9 +304,8 @@
 				1809E233289C93E600033CA3 /* SendView.swift in Sources */,
 				186B293A28A0D1EF0023D544 /* LightningController.swift in Sources */,
 				1824D0BD289B6233001C3F57 /* ReceiveView.swift in Sources */,
-				186B293C28A0DA420023D544 /* BitcoinController.swift in Sources */,
 				18A089D12899A9540040D131 /* StorageController.swift in Sources */,
-				1880C14E28A7F6AC0048D9BC /* newBitcoinController.swift in Sources */,
+				1880C14E28A7F6AC0048D9BC /* BitcoinController.swift in Sources */,
 				18A581CB2883770100FD076B /* TransactionHistoryView.swift in Sources */,
 				187A3A5B288921370040D7CA /* LightningWalletView.swift in Sources */,
 				1880C14C28A71C100048D9BC /* LNWalletView.swift in Sources */,
