@@ -18,6 +18,12 @@ class StorageController {
         return self.userDefaults.value(forKey: "lightningWalletInitialized") as? Bool ?? false
     }
     
+    func saveLightningWallet(id: String, name: String) {
+        self.userDefaults.set(true, forKey: "lightningWalletInitialized")
+        self.userDefaults.set(id, forKey: "lightningId")
+        self.userDefaults.set(name, forKey: "lightningName")
+    }
+    
     func saveBitcoinWallet(path: String, descriptor: String, changeDescriptor: String){
         self.userDefaults.set(true, forKey: "bitcoinWalletInitialized")
         self.userDefaults.set(path, forKey: "path")
@@ -30,17 +36,17 @@ class StorageController {
         self.userDefaults.set(mnemonic, forKey: "mnemonic")
     }
     
-    func saveLightningWallet(id: String, userId: String, name: String){
-        self.userDefaults.set(true, forKey: "lightningWalletInitialized")
-        self.userDefaults.set(id, forKey: "id")
-        self.userDefaults.set(userId, forKey: "userId")
-        self.userDefaults.set(name, forKey: "name")
-    }
-    
     func fetchInitialWalletData() -> RequiredInitialData {
         let descriptor: String = self.userDefaults.value(forKey: "descriptor") as? String ?? ""
         let changeDescriptor: String = self.userDefaults.value(forKey: "changeDescriptor") as? String ?? ""
         
         return RequiredInitialData(descriptor: descriptor, changeDescriptor: changeDescriptor)
+    }
+    
+    func fetchInitialLightningWalletData() -> RequiredInitialLightningData {
+        let id: String = self.userDefaults.value(forKey: "lightningId") as? String ?? ""
+        let name: String = self.userDefaults.value(forKey: "lightningName") as? String ??  ""
+        
+        return RequiredInitialLightningData(id: id, name: name)
     }
 }

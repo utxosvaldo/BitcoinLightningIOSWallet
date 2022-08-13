@@ -32,7 +32,12 @@ extension StartLightningWalletView {
                 NavigationLink(
                     destination: CreateLightningWalletView()
                 ){
-                    PrimaryButton(text: "Start")
+                    PrimaryButton(text: "Create Wallet")
+                }
+                NavigationLink(
+                    destination: ImportLightningWalletView()
+                ){
+                    PrimaryButton(text: "Import Wallet")
                 }
                 
             }

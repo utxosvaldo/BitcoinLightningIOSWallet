@@ -12,14 +12,20 @@ struct LightningWalletView: View {
     
     var body: some View {
         NavigationView {
-            Content(balanceText: "", sync: {})
+            Content(balanceText: stateController.lightningController.wallet.balanceSats, sync: sync)
+        }
+    }
+    
+    func sync() {
+        Task {
+            await stateController.lightningController.sync()
         }
     }
 }
 
 extension LightningWalletView {
     struct Content: View {
-        let balanceText: String
+        var balanceText: String
         let sync: () -> Void
         
         var body: some View {

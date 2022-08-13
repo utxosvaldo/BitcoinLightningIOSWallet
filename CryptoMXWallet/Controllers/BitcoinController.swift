@@ -15,10 +15,10 @@ class BitcoinController: ObservableObject {
     private(set) var bdkWallet: BitcoinDevKit.Wallet!
     private(set) var blockchain: BitcoinDevKit.Blockchain!
 
-    init(descriptor: String, changeDescriptor: String) {
+    init(descriptor: String, changeDescriptor: String, network: BitcoinDevKit.Network) {
         self.path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
 
-        let electrum = ElectrumConfig(url: "ssl://electrum.blockstream.info:60002", socks5: nil, retry: 5, timeout: nil, stopGap: 10)
+        let electrum = ElectrumConfig(url: "192.168.1.70:50001", socks5: nil, retry: 5, timeout: nil, stopGap: 10)
         let database = DatabaseConfig.sled(config: SledDbConfiguration(path: "\(self.path)/bitcoinWallet", treeName: "bitcoinWallet"))
         do {
             blockchain = try BitcoinDevKit.Blockchain(config: BlockchainConfig.electrum(config: electrum))
@@ -28,7 +28,7 @@ class BitcoinController: ObservableObject {
         }
         
         do {
-            bdkWallet = try BitcoinDevKit.Wallet(descriptor: descriptor, changeDescriptor: changeDescriptor, network: Network.testnet, databaseConfig: database)
+            bdkWallet = try BitcoinDevKit.Wallet(descriptor: descriptor, changeDescriptor: changeDescriptor, network: network, databaseConfig: database)
             let balance = try bdkWallet.getBalance()
             let lastUnusedAddress = bdkWallet.getLastUnusedAddress()
             let transactions = try bdkWallet.getTransactions()
@@ -42,16 +42,24 @@ class BitcoinController: ObservableObject {
             print("Initialize wallet error: \(error)")
         }
         
-        sync()
+//        sync()
     }
     
-    func sync() -> Void {
-        print("Syncing wallet...")
+    func sync() async -> Void {
+        print("Syncing Bitoin wallet...")
         do {
             try bdkWallet.sync(blockchain: blockchain, progress: nil)
-            wallet.balance = try bdkWallet.getBalance()
-            wallet.lastUnusedAddress = bdkWallet.getLastUnusedAddress()
-            wallet.transactions = try bdkWallet.getTransactions()
+            let balance = try bdkWallet.getBalance()
+            let transactions = try bdkWallet.getTransactions()
+            DispatchQueue.main.async {
+                self.wallet.balance = balance
+                self.wallet.lastUnusedAddress = self.bdkWallet.getLastUnusedAddress()
+                self.wallet.transactions = transactions
+            }
+            
+            print("Wallet Balance: \(wallet.balance)")
+            print("Wallet BalanceText: \(wallet.balanceText))
+            print("Wallet synced!")
         } catch let error {
             print("Syncing error: \(error)")
         }

@@ -11,27 +11,38 @@ struct WalletView: View {
     @EnvironmentObject var stateController: StateController
     
     var body: some View {
-        VStack{
-            TabView {
-                BitcoinWalletView()
-                    .environmentObject(stateController)
-                    .tabItem {
-                        Label("Bitcoin", systemImage: "bitcoinsign.circle")
-                    }
-                StartLightningWalletView()
-                    .environmentObject(stateController)
-                    .tabItem {
-                        Label("Lightning", systemImage: "bolt.circle")
-                    }
+        Content()
+    }
+}
+
+extension WalletView {
+    struct Content: View {
+        
+        var body: some View {
+            
+            VStack{
+                TabView {
+                    BitcoinWalletView()
+//                        .environmentObject(stateController)
+                        .tabItem {
+                            Label("Bitcoin", systemImage: "bitcoinsign.circle")
+                        }
+                    LNWalletView()
+//                        .environmentObject(stateController)
+                        .tabItem {
+                            Label("Lightning", systemImage: "bolt.circle")
+                        }
+                }
             }
         }
     }
 }
         
 
-struct WalletView_Previews: PreviewProvider {
-    static var previews: some View {
-        WalletView()
-            .environmentObject(StateController())
-    }
-}
+//struct WalletView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            WalletView.Content()
+//        }
+//    }
+//}

@@ -1,5 +1,5 @@
 //
-//  CreateLightningWalletView.swift
+//  importLightningWalletView.swift
 //  CryptoMXWallet
 //
 //  Created by Osvaldo Rosales Perez on 12/08/22.
@@ -7,49 +7,55 @@
 
 import SwiftUI
 
-struct CreateLightningWalletView: View {
+struct ImportLightningWalletView: View {
 //    @EnvironmentObject var wallet: Wallet
     @EnvironmentObject private var stateController: StateController
+    @State var id: String = ""
     @State var name: String = ""
     
     var body: some View {
-        Content(name: $name , createWallet: createWallet)
+        Content(id: $id, name: $name ,importWallet: importWallet)
     }
     
-    func createWallet() {
-        Task {
-            await stateController.createLightningWallet(name: name)
-        }
+    func importWallet() {
+        stateController.importLightningWallet(id: id, name: name)
     }
 }
 
-extension CreateLightningWalletView {
+extension ImportLightningWalletView {
     struct Content: View {
+        @Binding var id: String
         @Binding var name: String
-        let createWallet: () -> Void
+        let importWallet: () -> Void
         
         var body: some View {
             VStack(spacing: 40){
                 
                 HStack{
-                    Text("Create Wallet")
+                    Text("Import Wallet")
                         .lilacTitle()
                 }
                 
                 Form {
-                    Section(header: Text("Wallet name")) {
+                    Section(header: Text("Wallet Name")) {
                         TextEditor(text: $name)
+                            .submitLabel(.done)
+                    }
+                    
+                    Section(header: Text("Lightning Id")) {
+                        TextEditor(text: $id)
                             .submitLabel(.done)
                     }.multilineTextAlignment(.leading)
                 }
+    //            .onAppear {UITableView.appearance().backgroundColor = .clear}
                 
                 Spacer()
                 
                 VStack(spacing: 10){
                     
                     
-                    Button(action: createWallet){
-                        PrimaryButton(text: "Create Wallet", background: .blue)
+                    Button(action: importWallet){
+                        PrimaryButton(text: "Import Wallet", background: .blue)
                     }
                 }
                 
@@ -60,10 +66,10 @@ extension CreateLightningWalletView {
     }
 }
 
-struct CreateLightningWalletView_Previews: PreviewProvider {
+struct ImportLightningWalletView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            CreateLightningWalletView.Content(name: .constant("Test Lightning Wallet"), createWallet: {})
+            ImportLightningWalletView.Content(id:.constant("ab124d8a-f9b8-401e-87f0-f8bbc8188156    "),name: .constant("My Lightning Wallet"), importWallet: {})
         }
     }
 }

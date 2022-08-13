@@ -12,14 +12,20 @@ struct BitcoinWalletView: View {
     
     var body: some View {
         NavigationView {
-            Content(balanceText: stateController.bitcoinController.wallet.balanceText, sync: stateController.bitcoinController.sync)
+            Content(balanceText: $stateController.bitcoinController.wallet.balanceText, sync: sync)
+        }
+    }
+    
+    func sync() {
+        Task {
+            await stateController.bitcoinController.sync()
         }
     }
 }
 
 extension BitcoinWalletView {
     struct Content: View {
-        let balanceText: String
+        @Binding var balanceText: String
         let sync: () -> Void
         
         var body: some View {
