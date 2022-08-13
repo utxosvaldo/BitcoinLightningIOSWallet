@@ -11,7 +11,7 @@ struct ReceiveView: View {
     @EnvironmentObject private var stateController: StateController
     
     var body: some View {
-        Content(receiveAddress: stateController.bitcoinController.wallet.lastUnusedAddress)
+        Content(receiveAddress: stateController.bitcoinWallet.lastUnusedAddress)
     }
 }
 

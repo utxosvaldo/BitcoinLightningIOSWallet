@@ -58,7 +58,7 @@ class BitcoinController: ObservableObject {
             }
             
             print("Wallet Balance: \(wallet.balance)")
-            print("Wallet BalanceText: \(wallet.balanceText))
+//            print("Wallet BalanceText: \(wallet.balanceText))
             print("Wallet synced!")
         } catch let error {
             print("Syncing error: \(error)")

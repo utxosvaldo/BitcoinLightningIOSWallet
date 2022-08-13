@@ -12,7 +12,7 @@ struct TransactionHistoryView: View {
     @EnvironmentObject private var stateController: StateController
     
     var body: some View {
-        Content(transactions: stateController.bitcoinController.wallet.transactions)
+        Content(transactions: stateController.bitcoinWallet.transactions)
     }
 }
 

@@ -13,8 +13,12 @@ struct CreateNewWalletView: View {
     var body: some View {
         
         NavigationView {
-            Content(createWallet: stateController.createWalletFromScratch)
+            Content(createWallet: createWallet)
         }
+    }
+    
+    func createWallet () {
+        stateController.createBitcoinWallet()
     }
 }
 

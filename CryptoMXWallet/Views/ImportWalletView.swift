@@ -19,7 +19,7 @@ struct ImportWalletView: View {
     }
     
     func importWallet() {
-        stateController.importWallet(seed: seed)
+        stateController.importBitcoinWallet(seed: seed)
     }
 }
 

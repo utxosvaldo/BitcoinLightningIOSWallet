@@ -23,12 +23,10 @@ extension WalletView {
             VStack{
                 TabView {
                     BitcoinWalletView()
-//                        .environmentObject(stateController)
                         .tabItem {
                             Label("Bitcoin", systemImage: "bitcoinsign.circle")
                         }
                     LNWalletView()
-//                        .environmentObject(stateController)
                         .tabItem {
                             Label("Lightning", systemImage: "bolt.circle")
                         }

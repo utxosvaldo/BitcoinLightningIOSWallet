@@ -24,9 +24,8 @@ class StorageController {
         self.userDefaults.set(name, forKey: "lightningName")
     }
     
-    func saveBitcoinWallet(path: String, descriptor: String, changeDescriptor: String){
+    func saveBitcoinWallet(descriptor: String, changeDescriptor: String){
         self.userDefaults.set(true, forKey: "bitcoinWalletInitialized")
-        self.userDefaults.set(path, forKey: "path")
         self.userDefaults.set(descriptor, forKey: "descriptor")
         self.userDefaults.set(changeDescriptor, forKey: "changeDescriptor")
     }
@@ -40,7 +39,7 @@ class StorageController {
         let descriptor: String = self.userDefaults.value(forKey: "descriptor") as? String ?? ""
         let changeDescriptor: String = self.userDefaults.value(forKey: "changeDescriptor") as? String ?? ""
         
-        return RequiredInitialData(descriptor: descriptor, changeDescriptor: changeDescriptor)
+        return RequiredInitialData(descriptor: descriptor, changeDescriptor: changeDescriptor, mnemonic: nil)
     }
     
     func fetchInitialLightningWalletData() -> RequiredInitialLightningData {

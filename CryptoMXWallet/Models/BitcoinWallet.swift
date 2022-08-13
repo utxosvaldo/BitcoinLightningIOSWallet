@@ -36,4 +36,5 @@ extension BitcoinDevKit.Transaction {
 struct RequiredInitialData {
     let descriptor: String
     let changeDescriptor: String
+    let mnemonic: String?
 }

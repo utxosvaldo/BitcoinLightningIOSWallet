@@ -13,11 +13,12 @@ import CloudKit
 class StateController: ObservableObject {
     @Published var bitcoinWalletExist:  Bool
     @Published var lightningWalletExists: Bool
+    @Published var bitcoinWallet: BitcoinWallet!
+    @Published var lightningWallet: LightningWallet!
     private(set) var lightningController: LightningController!
-    private(set) var bitcoinController: BitcoinController!
+    private(set) var bitcoinController = newBitcoinController()
     private let ibexHubAPI = IbexHubAPI()
     private let storageController = StorageController()
-    private let network = BitcoinDevKit.Network.bitcoin
     
     init() {
         self.bitcoinWalletExist = storageController.doesBitcoinWalletExist()
@@ -30,12 +31,73 @@ class StateController: ObservableObject {
         }
     }
     
-    private func loadExistingBitcoinWallet(){
+    func loadExistingBitcoinWallet(){
         let initialWalletData: RequiredInitialData = storageController.fetchInitialWalletData()
         print("Loading existing wallet, descriptor is \(initialWalletData.descriptor)")
         print("Loading existing wallet, change descriptor is \(initialWalletData.changeDescriptor)")
         
-        bitcoinController = BitcoinController(descriptor: initialWalletData.descriptor, changeDescriptor: initialWalletData.changeDescriptor, network: network)
+        do {
+            bitcoinWallet = try bitcoinController.loadWallet(initialWalletData: initialWalletData)
+        } catch let error {
+            print("Error while loading existing bitcoin wallet: \(error)")
+        }
+    }
+    
+    func createBitcoinWallet(){
+        do {
+            let initialWalletData: RequiredInitialData = try bitcoinController.createWallet()
+            bitcoinWallet = try bitcoinController.loadWallet(initialWalletData: initialWalletData)
+            
+            bitcoinWalletExist = true
+            storageController.saveBitcoinWallet(descriptor: initialWalletData.descriptor, changeDescriptor: initialWalletData.changeDescriptor)
+            storageController.saveMnemonic(mnemonic: initialWalletData.mnemonic!)
+            
+        } catch let error {
+            print("Error while creating bitcoin wallet: \(error)")
+        }
+    }
+    
+    func importBitcoinWallet(seed: String){
+        print("Importing wallet with mnemonic: \(seed)")
+        do {
+            let initialWalletData: RequiredInitialData = try bitcoinController.createWallet(seed: seed)
+            bitcoinWallet = try bitcoinController.loadWallet(initialWalletData: initialWalletData)
+            
+            bitcoinWalletExist = true
+            storageController.saveBitcoinWallet(descriptor: initialWalletData.descriptor, changeDescriptor: initialWalletData.changeDescriptor)
+            storageController.saveMnemonic(mnemonic: initialWalletData.mnemonic!)
+            
+        } catch let error {
+            print("Error while importing bitcoin wallet: \(error)")
+        }
+    }
+    
+    func sync() {
+        Task {
+            print("Syncing Bitcoin wallet...")
+            do {
+                let syncedBitcoinWallet = try await bitcoinController.sync()
+                DispatchQueue.main.async {
+                    self.bitcoinWallet = syncedBitcoinWallet
+                }
+                print("Bitcoin wallet synced! Balance: \(self.bitcoinWallet.balance)")
+            }
+            catch let error {
+                print("Error while syncing bitcoin wallet: \(error)")
+            }
+        }
+    }
+    
+    func broadcastTx(recipient: String, amount: UInt64) {
+        do {
+            let txid:String = try bitcoinController.broadcastTx(recipient: recipient, amount: amount)
+            print("Sent: \(amount) Sats")
+            print("To: \(recipient)")
+            print("TxId: \(txid)")
+        }
+        catch let error {
+            print("Error while broadcasting transaction: \(error)")
+        }
     }
     
     private func loadExistingLightningWallet() {
@@ -60,61 +122,12 @@ class StateController: ObservableObject {
         }
         
     }
-
-    func createWalletFromScratch(){
-        do {
-            let keys: ExtendedKeyInfo = try generateExtendedKey(network: network, wordCount: WordCount.words12, password: nil)
-            let descriptor: String = createDescriptor(keys: keys)
-            let changeDescriptor: String = createChangeDescriptor(keys: keys)
-            
-            print("Creating wallet, descriptor is \(descriptor)")
-            print("Creating wallet, change descriptor is \(changeDescriptor)")
-            print("Creating wallet, mnemonic is: \(keys.mnemonic)")
-            
-            bitcoinController = BitcoinController(descriptor: descriptor, changeDescriptor: changeDescriptor, network: network)
-            
-            bitcoinWalletExist = true
-            storageController.saveBitcoinWallet(path: bitcoinController.path, descriptor: descriptor, changeDescriptor: changeDescriptor)
-            storageController.saveMnemonic(mnemonic: keys.mnemonic)
-            
-        } catch let error {
-            print(error)
-        }
-    }
     
-    func importWallet(seed: String){
-        print("Importing wallet with mnemonic: \(seed)")
-        do {
-            let keys: ExtendedKeyInfo = try restoreExtendedKey(network: network, mnemonic: seed, password: nil)
-            let descriptor: String = createDescriptor(keys: keys)
-            let changeDescriptor: String = createChangeDescriptor(keys: keys)
-            
-            bitcoinController = BitcoinController(descriptor: descriptor, changeDescriptor: changeDescriptor, network: network)
-            
-            bitcoinWalletExist = true
-            storageController.saveBitcoinWallet(path: bitcoinController.path, descriptor: descriptor, changeDescriptor: changeDescriptor)
-            storageController.saveMnemonic(mnemonic: keys.mnemonic)
-            
-        } catch let error {
-            print("Import wallet error: \(error)")
-        }
-    }
+
     
     func importLightningWallet(id: String, name: String) {
         lightningController = LightningController(id: id, name: name)
         lightningWalletExists = true
         storageController.saveLightningWallet(id: id, name: name)
-    }
-    
-    private func createDescriptor(keys: ExtendedKeyInfo) -> String {
-        let descriptor: String = "wpkh(\(keys.xprv)/84'/1'/0'/0/*)"
-        print("descriptor: \(descriptor)")
-        return descriptor
-    }
-    
-    private func createChangeDescriptor(keys: ExtendedKeyInfo) -> String {
-        let changeDescriptor: String = "wpkh(\(keys.xprv)/84'/1'/0'/1/*)"
-        print("change descriptor: \(changeDescriptor)")
-        return changeDescriptor
     }
 }
