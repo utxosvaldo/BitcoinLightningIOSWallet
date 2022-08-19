@@ -31,7 +31,7 @@ struct LNTransaction: Codable {
 struct LNInvoice: Codable {
     var bolt11: String
     var hash: String
-    var expirationUTC: UInt64
+    var expirationUtc: UInt64
 }
 
 struct LNInvoiceReceipt: Codable {
