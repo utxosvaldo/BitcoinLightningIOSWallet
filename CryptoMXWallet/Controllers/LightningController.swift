@@ -12,23 +12,37 @@ class LightningController: ObservableObject {
     private(set) var accountId: String!
     private let ibexHubAPI = IbexHubAPI()
     
-    private func initializeWallet(id: String) async throws -> LightningWallet{
-        let details: IbexAccountDetails = try await ibexHubAPI.getAccountDetails(accountId: id)
-        let transactions: [LNTransaction] = try await ibexHubAPI.getLatestTransactions(accountId: id)
-
+    func initializeWallet(id: String) async throws -> LightningWallet{
+        let detailsTask = Task {() -> IbexAccountDetails? in
+            let details = try await ibexHubAPI.getAccountDetails(accountId: id)
+            return details
+        }
+        
+        let transactionsTask = Task {() -> [LNTransaction]? in
+            let txs = try await ibexHubAPI.getLatestTransactions(accountId: id)
+            return txs
+        }
+        
+        let details = try await detailsTask.value!
+        let transactions = try await transactionsTask.value!
+        self.accountId = details.id
+        
         return LightningWallet(id: details.id, name: details.name, balanceMsats: details.balanceMsat, transactions: transactions)
     }
     
     func createWallet(name: String) async throws -> LightningWallet {
-        let ibexAccount: IbexAccount = try await ibexHubAPI.createIbexAccount(name: name)
-        print("Created ibex account: \(String(describing: ibexAccount))")
+        let accountTask = Task {() -> IbexAccount? in
+            let ibexAccount = try await ibexHubAPI.createIbexAccount(name: name)
+            return ibexAccount
+        }
         
-        accountId = ibexAccount.id
-        return LightningWallet(id: ibexAccount.id, name: ibexAccount.name, balanceMsats: 0, transactions: [])
+        let account = try await accountTask.value!
+        self.accountId = account.id
+        
+        return LightningWallet(id: account.id, name: account.name, balanceMsats: 0, transactions: [])
     }
     
-    func loadWallet(id: String) async throws -> LightningWallet {
-        self.accountId = id
+    func loadWallet(id: String) async throws -> LightningWallet{
         let lightningWallet: LightningWallet = try await initializeWallet(id: id)
         print("Finished loading lightning wallet: \(String(describing: lightningWallet))")
         

@@ -15,7 +15,10 @@ class BitcoinController: ObservableObject {
     private let network: BitcoinDevKit.Network
     private let database: BitcoinDevKit.DatabaseConfig
     
-    private let electrum: ElectrumConfig = .init(url: "192.168.1.70:50001", socks5: nil, retry: 5, timeout: nil, stopGap: 10)
+//    private let electrum: ElectrumConfig = .init(url: "192.168.1.70:50001", socks5: nil, retry: 5, timeout: nil, stopGap: 10)
+    
+    
+    private let electrum: ElectrumConfig = .init(url: "btc.lastingcoin.net:50002", socks5: nil, retry: 5, timeout: nil, stopGap: 10)
 
     init() {
         self.path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
@@ -55,7 +58,7 @@ class BitcoinController: ObservableObject {
         return RequiredInitialData(descriptor: descriptor, changeDescriptor: changeDescriptor, mnemonic: keys.mnemonic)
     }
     
-    func sync() async throws -> BitcoinWallet {
+    func sync() throws -> BitcoinWallet {
         try bdkWallet.sync(blockchain: blockchain, progress: nil)
         let balance = try bdkWallet.getBalance()
         let transactions = try bdkWallet.getTransactions()

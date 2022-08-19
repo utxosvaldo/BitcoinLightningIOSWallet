@@ -20,7 +20,7 @@ import Foundation
 
 class IbexHubAPI {
     private let baseUrl: String = "https://ibexhub.ibexmercado.com"
-    private let accessToken: String = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjA0MzM3MTMsIklEIjoiIiwiVHlwZSI6ImFjY2VzcyIsIlVzZXJJRCI6IjE5ZjUyMDY0LWM4MTUtNDc0Yy1iNGRkLTgwNTUyYzMwYjc4MyIsIlBlcm1pc3Npb25zIjpudWxsLCJQb29sIjoiSUJFWF9IVUIifQ.cgx3nNtsB51dhkVbWZKCu_f3goByHtwMpxy1A8IXEuxGw0KFgrOYIAUFAWiEZ23f0_InS-cUNLG6ER1ckdhbWoJclh98frF_ovcC2lWXwiz8i0e5J1hieFGoiLUSED8HDRdZd1JVqh88IexnkbbCoXX65vPlHyY8Tm619cItTm1n9m1eU-96hPFbYATvw1yOPmqw2vvUtpFi2xEP2z21K_hn-WjwgkX_D87VGRZrNsm0LlzrdNeLNPH5if570ib-yE6RuWSdJ73_IYW0-IxnqbrkBzP1aYZelHagPm5SNOfQDqc1JfiQVqXeysn0V0BIakaQmr7K87VZe1zlHsm396PdgiolQ0ZnP1NqS_NW6lJuHnxhE4OkpuatUxDZkzB6rWgmTcIQc0V7ktLMc3mbkejzbGSIYRofLX3QONAwzcIn3-zHNqu2_cdNAKjOpN_MBH_j4YYaH2VQYKzuNaedg-iAU4sB23P455n1VRIgbECv7rqcs6iYYTKZz095Jd81W9-E2Vpo4pIscPBsRpajGSOaqe0mF1kwPb13RCYLezn36Xc3fDo9qlfIzvyTFMH3jCKgZsKIARqObQmBaHNtFvdnMDjaKsLQonaPgfHSmS47eJo1UIEYsNZpPtqhofFfs3yYE_yXtyLQxgYBsvTWm8C2QIzFMFDXOXS9p0Imw88"
+    private let accessToken: String = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjA5MjMwMjgsIklEIjoiIiwiVHlwZSI6ImFjY2VzcyIsIlVzZXJJRCI6IjE5ZjUyMDY0LWM4MTUtNDc0Yy1iNGRkLTgwNTUyYzMwYjc4MyIsIlBlcm1pc3Npb25zIjpudWxsLCJQb29sIjoiSUJFWF9IVUIifQ.qd0JzPFOoDyt1LsBco0_WWtrMnhwYj62cKyx-k7EFm7vB6RUI3EyClEfudn-eNAs8DLOSyvwTwQ6oAaBCUTLCHfQ-WjyHJ4nmOpfPjfZN688M2vmuHjd5xU4Yq5rt3qoiFexzHIwc6wVtWF6AkQyLTqjDSvGgsrak6VFRSGirnqD-MA5bU2UQApfOpX2GIq39cgsmcIUP7lHS0EMX-_WF5NcN71PLwGOJTuJQq9tCDHC_QRM4VY61Gx8E_1yWY3g232JXy999eK4sFyyL8FC2twyrgBfEkGYbLs6PGK2G2lNnm3KxHk_nvDTPdiw7WA7E3K27YvdCQ4JPLs7cxso-Gsoy_uexCvvyTsm9Oncb_91d-41BUvSUydRbSL2I7ETKyyU0QKMMAECuD-VO3xH50m_jQbfcsBr1v1mt40c-QInI3cCGLOIxEd8cbPqzZqn9QJB0IGiROb3GeH89jG0bXHOD_URT2BjffSNkzokCZM5TIoVKc_Hf7iLBgv3nV-oViTIDlNrb4MtqGI-FZ_XM57anKrGwyVTf4sKeUKU4sTNjNCZtT5DRaR_nqRadF31zSo9rj2ss-YACDU85VIdqV88odIXAjaPJFcK6ZIuNoqcu82caRWiED1RSvNLUR7CD4a9k80EiRyGQtjkH034oZ5RSvJ1wyCEOlkdm8Hbl4Q"
     
     func createIbexAccount(name: String) async throws -> IbexAccount {
         let url = URL(string: baseUrl + "/account/create")!
@@ -55,7 +55,7 @@ class IbexHubAPI {
         let url = URL(string: baseUrl + "/transactions/\(accountId)/latest")!
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(accessToken, forHTTPHeaderField: "Authorization")
         

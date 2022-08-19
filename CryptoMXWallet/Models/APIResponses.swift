@@ -19,13 +19,13 @@ struct IbexAccountDetails: Codable {
 }
 
 struct LNTransaction: Codable {
-    var amountMsat: UInt64
+//    var amountMsat: Int64
+    
     var bolt11: String
-    var creationDateUtc: String
-    var feeMsat: UInt64
-    var hash: String
-    var memo: String
-    var settleDateUtc: String
+//    var feeMsat: UInt64
+//    var hash: String
+//    var memo: String?
+//    var settleDateUtc: String
 }
 
 struct LNInvoice: Codable {

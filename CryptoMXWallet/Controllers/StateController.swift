@@ -86,11 +86,11 @@ class StateController: ObservableObject {
         Task {
             print("Syncing Bitcoin wallet...")
             do {
-                let syncedBitcoinWallet = try await bitcoinController.sync()
+                let syncedBitcoinWallet = try bitcoinController.sync()
                 DispatchQueue.main.async {
                     self.bitcoinWallet = syncedBitcoinWallet
+                    print("Bitcoin wallet synced! Balance: \(self.bitcoinWallet.balance)")
                 }
-                print("Bitcoin wallet synced! Balance: \(self.bitcoinWallet.balance)")
             }
             catch let error {
                 print("Error while syncing bitcoin wallet: \(error)")
@@ -106,8 +106,8 @@ class StateController: ObservableObject {
                     let syncedLightningWallet = try await lightningController.sync()
                     DispatchQueue.main.async {
                         self.lightningWallet = syncedLightningWallet
+                        print("Lightning wallet synced! Balance: \(self.lightningWallet.balanceSats)")
                     }
-                    print("Lightning wallet synced! Balance: \(self.lightningWallet.balanceSats)")
                 }
                 catch let error {
                     print("Error while syncing lightning wallet: \(error)")
@@ -122,7 +122,7 @@ class StateController: ObservableObject {
         
         Task {
             do{
-                let loadedLightningWallet = try await lightningController.loadWallet(id: initialWalletData.id)
+                let loadedLightningWallet = try await lightningController.initializeWallet(id: initialWalletData.id)
                 
                 DispatchQueue.main.async {
                     self.lightningWallet = loadedLightningWallet
@@ -161,8 +161,8 @@ class StateController: ObservableObject {
                 DispatchQueue.main.async {
                     self.lightningWallet = importedLightningWallet
                     self.lightningWalletExists = true
+                    self.storageController.saveLightningWallet(id: self.lightningWallet.id, name: self.lightningWallet.name)
                 }
-                storageController.saveLightningWallet(id: lightningWallet.id, name: lightningWallet.name)
             }
             catch let error{
                 print("Error while creating lightning wallet: \(error)")
