@@ -29,6 +29,8 @@ extension LightningWalletView {
         var body: some View {
             VStack(spacing: 10) {
                 
+                Text("Lightning Wallet").lilacTitle()
+                
                 Spacer()
                 BalanceDisplay(balanceText: balance)
                 
@@ -51,9 +53,9 @@ extension LightningWalletView {
                 }
                 
                 HStack{
-//                    NavigationLink(destination: ReceiveView()){
+                    NavigationLink(destination: LNReceiveView()){
                     PrimaryButton(text: "Receive", background: .green)
-//                    }
+                    }
 //
 //                    NavigationLink(destination: SendView()){
                     PrimaryButton(text: "Send", background: .red)
@@ -63,7 +65,7 @@ extension LightningWalletView {
                 Spacer()
             }
             .padding()
-            .navigationBarTitle("Lightning Wallet", displayMode: .automatic)
+//            .navigationBarTitle("Lightning Wallet", displayMode: .automatic)
         }
     }
 }

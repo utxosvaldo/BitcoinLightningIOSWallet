@@ -12,9 +12,12 @@ import CloudKit
 
 class StateController: ObservableObject {
     @Published var bitcoinWalletExist:  Bool
+    @Published var ibexSignedIn: Bool = false
     @Published var lightningWalletExists: Bool
     @Published var bitcoinWallet: BitcoinWallet!
     @Published var lightningWallet: LightningWallet!
+    @Published var latestLNInvoice: LNInvoice!
+    private(set) var accessToken: String!
     private(set) var lightningController = LightningController()
     private(set) var bitcoinController = BitcoinController()
     private let storageController = StorageController()
@@ -25,9 +28,10 @@ class StateController: ObservableObject {
         if self.bitcoinWalletExist {
             loadExistingBitcoinWallet()
         }
-        if self.lightningWalletExists {
-            loadExistingLightningWallet()
-        }
+//        if self.lightningWalletExists {
+//            self.lightningController = LightningController()
+//            loadExistingLightningWallet()
+//        }
     }
     
     func loadExistingBitcoinWallet(){
@@ -116,12 +120,29 @@ class StateController: ObservableObject {
         }
     }
     
+    func signIntoIbex() {
+        Task {
+            do{
+                try await lightningController.initializeIbexHub()
+                
+                DispatchQueue.main.async {
+                    self.ibexSignedIn = true
+                }
+            }
+            catch let error{
+                print("Error while loading lightning wallet: \(error)")
+            }
+        }
+    }
+    
     func loadExistingLightningWallet() {
         let initialWalletData: RequiredInitialLightningData = storageController.fetchInitialLightningWalletData()
         print("Loading existing lightning wallet with \(initialWalletData)")
         
         Task {
             do{
+//                try await lightningController.initializeIbexHub()
+                
                 let loadedLightningWallet = try await lightningController.initializeWallet(id: initialWalletData.id)
                 
                 DispatchQueue.main.async {
@@ -139,6 +160,7 @@ class StateController: ObservableObject {
     func createLightningWallet(name: String) {
         Task {
             do{
+//                try await lightningController.initializeIbexHub()
                 let newLightningWallet = try await lightningController.createWallet(name: name)
                 
                 DispatchQueue.main.async {
@@ -166,6 +188,25 @@ class StateController: ObservableObject {
             }
             catch let error{
                 print("Error while creating lightning wallet: \(error)")
+            }
+        }
+    }
+    
+    func clearLatestInvoice() {
+        latestLNInvoice = nil
+    }
+    
+    func createInvoice(amount: String, memo: String){
+        Task {
+            do{
+                let lnInvoice = try await self.lightningController.addInvoice(amountMsat: amount.toUInt64, memo: memo)
+                
+                DispatchQueue.main.async {
+                    self.latestLNInvoice = lnInvoice
+                }
+            }
+            catch let error{
+                print("Error while creating lightning invoice: \(error)")
             }
         }
     }

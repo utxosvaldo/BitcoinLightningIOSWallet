@@ -34,6 +34,12 @@ extension String {
         ]
     }
     
+    var shortBolt: String {
+        let prefix = self.prefix(18)
+        let suffix = self.suffix(18)
+        return "\(prefix)...\(suffix)"
+    }
+    
     var toUInt64: UInt64 {
         return UInt64(self) ?? 0
     }

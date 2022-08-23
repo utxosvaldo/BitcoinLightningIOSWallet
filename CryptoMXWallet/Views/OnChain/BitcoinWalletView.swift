@@ -29,6 +29,8 @@ extension BitcoinWalletView {
         var body: some View {
             VStack(spacing: 40) {
                 
+                Text("Bitcoin Wallet").lilacTitle()
+                
                 Spacer()
                 BalanceDisplay(balanceText: balanceText)
                 
@@ -53,7 +55,7 @@ extension BitcoinWalletView {
                 Spacer()
             }
             .padding()
-            .navigationBarTitle("Bitcoin Wallet", displayMode: .automatic)
+//            .navigationBarTitle("Bitcoin Wallet", displayMode: .inline)
         }
     }
 }

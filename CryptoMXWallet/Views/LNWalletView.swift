@@ -11,7 +11,16 @@ struct LNWalletView: View {
     @EnvironmentObject var stateController: StateController
     
     var body: some View {
-        Content(walletExists: stateController.lightningWalletExists)
+        if stateController.lightningWalletExists {
+            if stateController.lightningWallet != nil {
+                LightningWalletView()
+            } else {
+                ProgressView()
+                    .onAppear(perform: stateController.loadExistingLightningWallet)
+            }
+        } else {
+            StartLightningWalletView()
+        }
     }
 }
 

@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct Auth: Codable{
+    var accessToken: String
+}
+
 struct IbexAccount: Codable {
     var id: String
     var name: String

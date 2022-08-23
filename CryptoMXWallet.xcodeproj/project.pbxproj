@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1809E233289C93E600033CA3 /* SendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809E232289C93E600033CA3 /* SendView.swift */; };
 		1809E23B289DD90600033CA3 /* LightningWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1809E23A289DD90600033CA3 /* LightningWallet.swift */; };
+		18238C8528AFDB870095858D /* LNReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18238C8428AFDB870095858D /* LNReceiveView.swift */; };
 		1824D0BD289B6233001C3F57 /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824D0BC289B6233001C3F57 /* ReceiveView.swift */; };
 		1824D0BF289B71CF001C3F57 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824D0BE289B71CF001C3F57 /* Formatting.swift */; };
 		183C11DB28639CBA0071A291 /* BasicTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11DA28639CBA0071A291 /* BasicTextStyle.swift */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		1809E232289C93E600033CA3 /* SendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendView.swift; sourceTree = "<group>"; };
 		1809E23A289DD90600033CA3 /* LightningWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningWallet.swift; sourceTree = "<group>"; };
+		18238C8428AFDB870095858D /* LNReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LNReceiveView.swift; sourceTree = "<group>"; };
 		1824D0BC289B6233001C3F57 /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
 		1824D0BE289B71CF001C3F57 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		183C11DA28639CBA0071A291 /* BasicTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTextStyle.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				187A3A5A288921370040D7CA /* LightningWalletView.swift */,
+				18238C8428AFDB870095858D /* LNReceiveView.swift */,
 				18823C7428A6D29100D3572E /* StartLightningWalletView.swift */,
 				1880C14928A715590048D9BC /* ImportLightningWalletView.swift */,
 				18823C7828A6D65B00D3572E /* CreateLightningWalletView.swift */,
@@ -319,6 +322,7 @@
 				187A3A5F28893EC90040D7CA /* CreateNewWalletView.swift in Sources */,
 				18823C7528A6D29100D3572E /* StartLightningWalletView.swift in Sources */,
 				18A089D7289A08DC0040D131 /* TestData.swift in Sources */,
+				18238C8528AFDB870095858D /* LNReceiveView.swift in Sources */,
 				187A3A59288920790040D7CA /* BitcoinWalletView.swift in Sources */,
 				18A581C92883759F00FD076B /* WalletView.swift in Sources */,
 				1824D0BF289B71CF001C3F57 /* Formatting.swift in Sources */,

@@ -11,7 +11,12 @@ struct WalletView: View {
     @EnvironmentObject var stateController: StateController
     
     var body: some View {
-        Content()
+        if stateController.ibexSignedIn {
+            Content()
+        } else {
+            ProgressView()
+                .onAppear(perform: stateController.signIntoIbex)
+        }
     }
 }
 

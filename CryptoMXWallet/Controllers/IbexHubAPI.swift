@@ -20,7 +20,37 @@ import Foundation
 
 class IbexHubAPI {
     private let baseUrl: String = "https://ibexhub.ibexmercado.com"
-    private let accessToken: String = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjA5MjMwMjgsIklEIjoiIiwiVHlwZSI6ImFjY2VzcyIsIlVzZXJJRCI6IjE5ZjUyMDY0LWM4MTUtNDc0Yy1iNGRkLTgwNTUyYzMwYjc4MyIsIlBlcm1pc3Npb25zIjpudWxsLCJQb29sIjoiSUJFWF9IVUIifQ.qd0JzPFOoDyt1LsBco0_WWtrMnhwYj62cKyx-k7EFm7vB6RUI3EyClEfudn-eNAs8DLOSyvwTwQ6oAaBCUTLCHfQ-WjyHJ4nmOpfPjfZN688M2vmuHjd5xU4Yq5rt3qoiFexzHIwc6wVtWF6AkQyLTqjDSvGgsrak6VFRSGirnqD-MA5bU2UQApfOpX2GIq39cgsmcIUP7lHS0EMX-_WF5NcN71PLwGOJTuJQq9tCDHC_QRM4VY61Gx8E_1yWY3g232JXy999eK4sFyyL8FC2twyrgBfEkGYbLs6PGK2G2lNnm3KxHk_nvDTPdiw7WA7E3K27YvdCQ4JPLs7cxso-Gsoy_uexCvvyTsm9Oncb_91d-41BUvSUydRbSL2I7ETKyyU0QKMMAECuD-VO3xH50m_jQbfcsBr1v1mt40c-QInI3cCGLOIxEd8cbPqzZqn9QJB0IGiROb3GeH89jG0bXHOD_URT2BjffSNkzokCZM5TIoVKc_Hf7iLBgv3nV-oViTIDlNrb4MtqGI-FZ_XM57anKrGwyVTf4sKeUKU4sTNjNCZtT5DRaR_nqRadF31zSo9rj2ss-YACDU85VIdqV88odIXAjaPJFcK6ZIuNoqcu82caRWiED1RSvNLUR7CD4a9k80EiRyGQtjkH034oZ5RSvJ1wyCEOlkdm8Hbl4Q"
+    private(set) var accessToken: String!
+    
+//    init(accessToken: String){
+//        self.accessToken = accessToken
+//    }
+    
+    func updateAccessToken(accessToken: String) {
+        self.accessToken = accessToken
+    }
+    
+    func getAccessToken() async throws -> Auth {
+        let baseUrl = "https://ibexhub.ibexmercado.com"
+        let url = URL(string: baseUrl + "/auth/signin")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body: [String: AnyHashable] = [
+            "email": "osvaldo.rosales.96@gmail.com",
+            "password": "Lightning69!"
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        let auth = try JSONDecoder().decode(Auth.self, from: data)
+//        accessToken = auth.accessToken
+//        print("Got accessToken: \(String(describing: accessToken))")
+        return auth
+    }
     
     func createIbexAccount(name: String) async throws -> IbexAccount {
         let url = URL(string: baseUrl + "/account/create")!

@@ -10,7 +10,18 @@ import BitcoinDevKit
 
 class LightningController: ObservableObject {
     private(set) var accountId: String!
-    private let ibexHubAPI = IbexHubAPI()
+    private(set) var ibexHubAPI = IbexHubAPI()
+    
+    func initializeIbexHub() async throws {
+        print("Getting access token........")
+        let signInTask = Task {() -> String in
+            let auth: Auth = try await ibexHubAPI.getAccessToken()
+            return auth.accessToken
+        }
+        let accessToken = try await signInTask.value
+        print("Got access Token: \(accessToken)")
+        ibexHubAPI.updateAccessToken(accessToken: accessToken)
+    }
     
     func initializeWallet(id: String) async throws -> LightningWallet{
         let detailsTask = Task {() -> IbexAccountDetails? in
@@ -30,8 +41,24 @@ class LightningController: ObservableObject {
         return LightningWallet(id: details.id, name: details.name, balanceMsats: details.balanceMsat, transactions: transactions)
     }
     
+//    func signInIbex() async throws {
+//        try await ibexHubAPI.getAccessToken()
+//    }
+//
+    
+//    func signInIbex() async throws -> Void {
+//        let signInTask = Task {() -> String in
+//            let auth: Auth = try await ibexHubAPI.getAccessToken()
+//            return auth.accessToken
+//        }
+//        let accessToken = try await signInTask.value
+//        ibexHubAPI.updateAccessToken(accessToken: accessToken)
+//        return
+//    }
+    
     func createWallet(name: String) async throws -> LightningWallet {
         let accountTask = Task {() -> IbexAccount? in
+//            try await ibexHubAPI.getAccessToken()
             let ibexAccount = try await ibexHubAPI.createIbexAccount(name: name)
             return ibexAccount
         }

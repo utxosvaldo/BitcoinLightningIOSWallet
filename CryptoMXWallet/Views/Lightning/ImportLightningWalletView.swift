@@ -42,9 +42,9 @@ extension ImportLightningWalletView {
                 }
     //            .onAppear {UITableView.appearance().backgroundColor = .clear}
                 
-                Spacer()
+//                Spacer()
                 
-                VStack(spacing: 10){
+                VStack(){
                     Button(action: importWallet){
                         PrimaryButton(text: "Import Wallet", background: .blue)
                     }

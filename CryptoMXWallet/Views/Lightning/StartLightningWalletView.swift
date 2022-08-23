@@ -11,7 +11,6 @@ struct StartLightningWalletView: View {
     @EnvironmentObject var stateController: StateController
     
     var body: some View {
-        
         NavigationView {
             Content()
         }
