@@ -10,12 +10,20 @@ import Foundation
 class StorageController {
     private let userDefaults: UserDefaults = UserDefaults.standard
     
+    func doesSetUpDone() -> Bool {
+        return self.userDefaults.value(forKey: "setUpDone") as? Bool ?? false
+    }
+    
     func doesBitcoinWalletExist() -> Bool {
         return self.userDefaults.value(forKey: "bitcoinWalletInitialized") as? Bool ?? false
     }
     
     func doesLightningWalletExist() -> Bool {
         return self.userDefaults.value(forKey: "lightningWalletInitialized") as? Bool ?? false
+    }
+    
+    func saveSetUpDone() {
+        self.userDefaults.set(true, forKey: "setUpDone")
     }
     
     func saveLightningWallet(id: String, name: String) {
