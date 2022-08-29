@@ -13,10 +13,10 @@ struct CryptoMXWalletApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if stateController.bitcoinWalletExist {
+            if stateController.setUpDone {
                 WalletView().environmentObject(stateController)
             } else {
-                CreateNewWalletView().environmentObject(stateController)
+                AppStarterView().environmentObject(stateController)
             }
         }
     }

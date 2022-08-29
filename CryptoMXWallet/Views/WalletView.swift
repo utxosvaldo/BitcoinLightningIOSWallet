@@ -15,7 +15,6 @@ struct WalletView: View {
             Content()
         } else {
             ProgressView()
-                .onAppear(perform: stateController.signIntoIbex)
         }
     }
 }
@@ -31,7 +30,7 @@ extension WalletView {
                         .tabItem {
                             Label("Bitcoin", systemImage: "bitcoinsign.circle")
                         }
-                    LNWalletView()
+                    LightningWalletView()
                         .tabItem {
                             Label("Lightning", systemImage: "bolt.circle")
                         }

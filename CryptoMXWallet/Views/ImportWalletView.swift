@@ -15,7 +15,11 @@ struct ImportWalletView: View {
     @State var seed: String = ""
     
     var body: some View {
-        Content(seed: $seed, importWallet: importWallet)
+        if stateController.bitcoinWalletExists {
+            SeedView().environmentObject(stateController)
+        } else {
+            Content(seed: $seed, importWallet: importWallet)
+        }
     }
     
     func importWallet() {

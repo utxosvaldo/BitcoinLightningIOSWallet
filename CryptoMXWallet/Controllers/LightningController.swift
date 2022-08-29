@@ -41,21 +41,6 @@ class LightningController: ObservableObject {
         return LightningWallet(id: details.id, name: details.name, balanceMsats: details.balanceMsat, transactions: transactions)
     }
     
-//    func signInIbex() async throws {
-//        try await ibexHubAPI.getAccessToken()
-//    }
-//
-    
-//    func signInIbex() async throws -> Void {
-//        let signInTask = Task {() -> String in
-//            let auth: Auth = try await ibexHubAPI.getAccessToken()
-//            return auth.accessToken
-//        }
-//        let accessToken = try await signInTask.value
-//        ibexHubAPI.updateAccessToken(accessToken: accessToken)
-//        return
-//    }
-    
     func createWallet(name: String) async throws -> LightningWallet {
         let accountTask = Task {() -> IbexAccount? in
 //            try await ibexHubAPI.getAccessToken()
@@ -81,7 +66,9 @@ class LightningController: ObservableObject {
         let details: IbexAccountDetails = try await ibexHubAPI.getAccountDetails(accountId: accountId)
         let transactions = try await ibexHubAPI.getLatestTransactions(accountId: accountId)
         
-        return LightningWallet(id: details.id, name: details.name, balanceMsats: details.balanceMsat, transactions: transactions)
+        let syncedWallet = LightningWallet(id: details.id, name: details.name, balanceMsats: details.balanceMsat, transactions: transactions)
+        
+        return syncedWallet
     }
     
     func addInvoice(amountMsat: UInt64, memo: String) async throws -> LNInvoice {

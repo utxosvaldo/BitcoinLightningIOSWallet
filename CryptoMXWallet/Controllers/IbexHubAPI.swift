@@ -20,6 +20,7 @@ import Foundation
 
 class IbexHubAPI {
     private let baseUrl: String = "https://ibexhub.ibexmercado.com"
+    private let wafKey: String = "gkfY34ZNXxRldiH19tqVNJFH3xbyojR"
     private(set) var accessToken: String!
     
 //    init(accessToken: String){
@@ -37,6 +38,7 @@ class IbexHubAPI {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(wafKey, forHTTPHeaderField: "X-WAF-KEY")
         
         let body: [String: AnyHashable] = [
             "email": "osvaldo.rosales.96@gmail.com",
@@ -47,8 +49,6 @@ class IbexHubAPI {
         let (data, _) = try await URLSession.shared.data(for: request)
         
         let auth = try JSONDecoder().decode(Auth.self, from: data)
-//        accessToken = auth.accessToken
-//        print("Got accessToken: \(String(describing: accessToken))")
         return auth
     }
     
@@ -58,6 +58,7 @@ class IbexHubAPI {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(wafKey, forHTTPHeaderField: "X-WAF-KEY")
         request.setValue(accessToken, forHTTPHeaderField: "Authorization")
         
         let body: [String: AnyHashable] = [
@@ -75,6 +76,7 @@ class IbexHubAPI {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue(accessToken, forHTTPHeaderField: "Authorization")
+        request.setValue(wafKey, forHTTPHeaderField: "X-WAF-KEY")
         
         let (data, _) = try await URLSession.shared.data(for: request)
         
@@ -87,10 +89,19 @@ class IbexHubAPI {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(wafKey, forHTTPHeaderField: "X-WAF-KEY")
         request.setValue(accessToken, forHTTPHeaderField: "Authorization")
         
         let (data, _) = try await URLSession.shared.data(for: request)
-        return try JSONDecoder().decode([LNTransaction].self, from: data)
+        var transactionList: [LNTransaction] = []
+        
+        do{
+            transactionList = try JSONDecoder().decode([LNTransaction].self, from: data)
+        } catch let error {
+            print("Error while getting latest transactions: \(error)")
+        }
+
+        return transactionList
     }
     
     func addInvoice(accountId: String, amountMsat: UInt64, memo: String) async throws -> LNInvoice {
@@ -99,6 +110,7 @@ class IbexHubAPI {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(wafKey, forHTTPHeaderField: "X-WAF-KEY")
         request.setValue(accessToken, forHTTPHeaderField: "Authorization")
         
         let body: [String: AnyHashable] = [
@@ -119,6 +131,7 @@ class IbexHubAPI {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(wafKey, forHTTPHeaderField: "X-WAF-KEY")
         request.setValue(accessToken, forHTTPHeaderField: "Authorization")
         
         let body: [String: AnyHashable] = [
@@ -139,6 +152,7 @@ class IbexHubAPI {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(wafKey, forHTTPHeaderField: "X-WAF-KEY")
         request.setValue(accessToken, forHTTPHeaderField: "Authorization")
         
         let (data, _) = try await URLSession.shared.data(for: request)

@@ -19,7 +19,7 @@ struct LNWalletView: View {
                     .onAppear(perform: stateController.loadExistingLightningWallet)
             }
         } else {
-            StartLightningWalletView()
+            SetUpLightningWalletView()
         }
     }
 }
@@ -33,7 +33,7 @@ extension LNWalletView {
                 if walletExists {
                     LightningWalletView()
                 } else {
-                    StartLightningWalletView()
+                    SetUpLightningWalletView()
                 }
             }
         }

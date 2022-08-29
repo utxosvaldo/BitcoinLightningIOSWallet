@@ -11,9 +11,9 @@ import UIKit
 import CloudKit
 
 class StateController: ObservableObject {
-//    @Published var bitcoinWalletExist:  Bool
+    @Published var bitcoinWalletExists:  Bool = false
     @Published var ibexSignedIn: Bool = false
-//    @Published var lightningWalletExists: Bool
+    @Published var lightningWalletExists: Bool = false
     @Published var setUpDone: Bool
     @Published var bitcoinWallet: BitcoinWallet!
     @Published var lightningWallet: LightningWallet!
@@ -24,11 +24,6 @@ class StateController: ObservableObject {
     private let storageController = StorageController()
     
     init() {
-//        self.bitcoinWalletExist = storageController.doesBitcoinWalletExist()
-//        self.lightningWalletExists = storageController.doesLightningWalletExist()
-//        if self.bitcoinWalletExist {
-//            loadExistingBitcoinWallet()
-//        }
         setUpDone = storageController.doesSetUpDone()
         
         if setUpDone{
@@ -54,14 +49,19 @@ class StateController: ObservableObject {
             let initialWalletData: RequiredInitialData = try bitcoinController.createWallet()
             bitcoinWallet = try bitcoinController.loadWallet(initialWalletData: initialWalletData)
             
-//            bitcoinWalletExist = true
             storageController.saveBitcoinWallet(descriptor: initialWalletData.descriptor, changeDescriptor: initialWalletData.changeDescriptor)
             storageController.saveMnemonic(mnemonic: initialWalletData.mnemonic!)
-            
+            bitcoinWalletExists = true
+
         } catch let error {
             print("Error while creating bitcoin wallet: \(error)")
         }
     }
+    
+    func getMnemonic() -> String {
+        return storageController.fetchMnemonic()
+    }
+    
     
     func importBitcoinWallet(seed: String){
         print("Importing wallet with mnemonic: \(seed)")
@@ -69,10 +69,9 @@ class StateController: ObservableObject {
             let initialWalletData: RequiredInitialData = try bitcoinController.createWallet(seed: seed)
             bitcoinWallet = try bitcoinController.loadWallet(initialWalletData: initialWalletData)
             
-//            bitcoinWalletExist = true
             storageController.saveBitcoinWallet(descriptor: initialWalletData.descriptor, changeDescriptor: initialWalletData.changeDescriptor)
             storageController.saveMnemonic(mnemonic: initialWalletData.mnemonic!)
-            
+                        bitcoinWalletExists = true
         } catch let error {
             print("Error while importing bitcoin wallet: \(error)")
         }
@@ -113,6 +112,7 @@ class StateController: ObservableObject {
                 let syncedLightningWallet = try await lightningController.sync()
                 DispatchQueue.main.async {
                     self.lightningWallet = syncedLightningWallet
+                    self.storageController.saveLightningWallet(wallet: syncedLightningWallet)
                     print("Lightning wallet synced! Balance: \(self.lightningWallet.balanceSats)")
                 }
             }
@@ -122,51 +122,52 @@ class StateController: ObservableObject {
         }
     }
     
-//    func signIntoIbex() {
+    func signIntoIbex() {
+        Task {
+            do{
+                try await lightningController.initializeIbexHub()
+
+                DispatchQueue.main.async {
+                    self.ibexSignedIn = true
+                }
+            }
+            catch let error{
+                print("Error while signing into IbexHUB: \(error)")
+            }
+        }
+    }
+    
+    func loadExistingLightningWallet() {
+        let existingWallet: LightningWallet = storageController.fetchLightningWallet()
+//        let initialWalletData: RequiredInitialLightningData = storageController.fetchInitialLightningWalletData()
+        print("Loading existing lightning wallet with \(existingWallet)")
+        
 //        Task {
 //            do{
-//                try await lightningController.initializeIbexHub()
+//                let loadedLightningWallet = try await lightningController.initializeWallet(id: initialWalletData.id)
 //
 //                DispatchQueue.main.async {
-//                    self.ibexSignedIn = true
+        self.lightningWallet = existingWallet
+        self.lightningWalletExists = true
 //                }
 //            }
 //            catch let error{
 //                print("Error while loading lightning wallet: \(error)")
 //            }
 //        }
-//    }
-    
-    func loadExistingLightningWallet() {
-        let initialWalletData: RequiredInitialLightningData = storageController.fetchInitialLightningWalletData()
-        print("Loading existing lightning wallet with \(initialWalletData)")
-        
-        Task {
-            do{
-                let loadedLightningWallet = try await lightningController.initializeWallet(id: initialWalletData.id)
-                
-                DispatchQueue.main.async {
-                    self.lightningWallet = loadedLightningWallet
-                    self.lightningWalletExists = true
-                }
-            }
-            catch let error{
-                print("Error while loading lightning wallet: \(error)")
-            }
-        }
     }
 
     
     func createLightningWallet(name: String) {
         Task {
             do{
-//                try await lightningController.initializeIbexHub()
                 let newLightningWallet = try await lightningController.createWallet(name: name)
                 
                 DispatchQueue.main.async {
                     self.lightningWallet = newLightningWallet
+                    self.storageController.saveLightningWallet(wallet: newLightningWallet)
                     self.lightningWalletExists = true
-                    self.storageController.saveLightningWallet(id: self.lightningWallet.id, name: self.lightningWallet.name)
+                    self.storageController.saveSetUpDone()
                 }
             }
             catch let error{
@@ -183,7 +184,7 @@ class StateController: ObservableObject {
                 DispatchQueue.main.async {
                     self.lightningWallet = importedLightningWallet
                     self.lightningWalletExists = true
-                    self.storageController.saveLightningWallet(id: self.lightningWallet.id, name: self.lightningWallet.name)
+                    self.storageController.saveLightningWallet(wallet: importedLightningWallet)
                 }
             }
             catch let error{

@@ -7,33 +7,46 @@
 
 import SwiftUI
 
-struct StartLightningWalletView: View {
+struct SetUpBitcoinWalletView: View {
     @EnvironmentObject var stateController: StateController
     
     var body: some View {
-        NavigationView {
-            Content()
+        
+        if stateController.bitcoinWalletExists {
+            SeedView().environmentObject(stateController)
+        } else {
+            NavigationView {
+                Content(createWallet: createWallet)
+            }
         }
+    }
+    
+    func createWallet () {
+        stateController.createBitcoinWallet()
     }
 }
 
-extension StartLightningWalletView {
+extension SetUpBitcoinWalletView {
     struct Content: View {
+        let createWallet: () -> Void
         
         var body: some View {
             VStack(spacing: 40){
                 VStack(spacing: 20){
-                    Text("Lightning Wallet")
+                    Text("Set up your")
+                        .foregroundColor(Color("AccentColor"))
+                    Text("Bitcoin Wallet")
                         .lilacTitle()
+                }
+
+                Button(action: {
+                    createWallet()
+                }){
+                    PrimaryButton(text: "Create Wallet")
                 }
                 
                 NavigationLink(
-                    destination: CreateLightningWalletView()
-                ){
-                    PrimaryButton(text: "Create Wallet")
-                }
-                NavigationLink(
-                    destination: ImportLightningWalletView()
+                    destination: ImportWalletView()
                 ){
                     PrimaryButton(text: "Import Wallet")
                 }
@@ -45,11 +58,11 @@ extension StartLightningWalletView {
     }
 }
 
-struct StartLightningWalletView_Previews: PreviewProvider {
+struct SetUpBitcoinWalletView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView{
-                StartLightningWalletView.Content()
+                SetUpBitcoinWalletView.Content(createWallet: {})
             }
         }
     }

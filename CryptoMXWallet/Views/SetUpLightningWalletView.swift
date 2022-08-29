@@ -1,38 +1,44 @@
 //
-//  CreateNewWalletView.swift
+//  SetUpLightningWalletView.swift
 //  CryptoMXWallet
 //
-//  Created by Osvaldo Rosales Perez on 21/07/22.
+//  Created by Osvaldo Rosales Perez on 24/08/22.
 //
 
 import SwiftUI
 
-struct CreateNewWalletView: View {
+struct SetUpLightningWalletView: View {
     @EnvironmentObject var stateController: StateController
+    
+    @State private var lightningWalletCreated: Bool = false
     
     var body: some View {
         
-        NavigationView {
-            Content(createWallet: createWallet)
+        if stateController.lightningWalletExists {
+            SeedView().environmentObject(stateController)
+        } else {
+            NavigationView {
+                Content(createWallet: createWallet)
+            }
         }
     }
     
     func createWallet () {
-        stateController.createBitcoinWallet()
+        stateController.createLightningWallet()
     }
 }
 
-extension CreateNewWalletView {
+extension SetUpLightningWalletView {
     struct Content: View {
         let createWallet: () -> Void
         
         var body: some View {
             VStack(spacing: 40){
                 VStack(spacing: 20){
-                    Text("CryptoMX")
-                        .lilacTitle()
-                    Text("wallet")
+                    Text("Set up your")
                         .foregroundColor(Color("AccentColor"))
+                    Text("Lightning Wallet")
+                        .lilacTitle()
                 }
 
                 Button(action: {
@@ -40,6 +46,8 @@ extension CreateNewWalletView {
                 }){
                     PrimaryButton(text: "Create Wallet")
                 }
+                
+                NavigationLink(destination: <#T##() -> Destination#>, label: <#T##() -> Label#>
                 
                 NavigationLink(
                     destination: ImportWalletView()
@@ -54,11 +62,11 @@ extension CreateNewWalletView {
     }
 }
 
-struct CreateNewWalletView_Previews: PreviewProvider {
+struct SetUpLightningWalletView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView{
-                CreateNewWalletView.Content(createWallet: {})
+                SetUpLightningWalletView.Content(createWallet: {})
             }
         }
     }

@@ -107,7 +107,7 @@ extension LNReceiveView {
                         .contextMenu {
                             Button(action: {
                                 UIPasteboard.general.string = lnInvoice.bolt11}) {
-                                    Text("Copy Address to clipboard")
+                                    Text("Copy Lightning Invoice to clipboard")
                                 }
                         }
                     Button(action: {showInvoiceSheet = false}){
