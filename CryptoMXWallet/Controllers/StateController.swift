@@ -193,8 +193,8 @@ class StateController: ObservableObject {
         latestLNInvoice = nil
     }
     
-    func decodeInvoice(bolt11: String) async throws -> LNInvoiceDetails{
-        let details: LNInvoiceDetails = try await self.lightningController.decodeBolt11(bolt11: bolt11)
+    func decodeInvoice(bolt11: String) async throws -> DecodedLNInvoice{
+        let details: DecodedLNInvoice = try await self.lightningController.decodeBolt11(bolt11: bolt11)
         return details
     }
     
@@ -211,10 +211,10 @@ class StateController: ObservableObject {
         }
     }
     
-    func createInvoice(amount: String, memo: String){
+    func createInvoice(amount: UInt64, memo: String){
         Task {
             do{
-                let lnInvoice = try await self.lightningController.addInvoice(amountMsat: amount.toUInt64*1000, memo: memo)
+                let lnInvoice = try await self.lightningController.addInvoice(amountMsat: amount, memo: memo)
                 
                 DispatchQueue.main.async {
                     self.latestLNInvoice = lnInvoice

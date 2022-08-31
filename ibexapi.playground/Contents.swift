@@ -45,19 +45,36 @@ let getAccessTask = Task {
 //    }
 //}
 
-let bolt11 = "lnbc12345670p1p3samkvpp5977wedmjd2jferhpas8m4msl62hffurmjrgsyy5lvwut6t3lpy5qdq623jhxapqd4jk6meqwashwcthvycqzpgxqzuysp5pl9evjf3jcmzey49pj0j7r2lqad7rgpeplwm4x04kskvm7zufgks9qyyssqaxyev39vevn75yxdyte4p460mmcxgs0esewfrqpfx5lfsdpkea0r525ehcwkal0r6ty32g9s2tnujs4kn6y2fq6vjmjfkkkmt50082spwc6r0q"
+let bolt11 = "lnbc123450n1p3sln6vpp502zpyhflxzza8g6204dkqegek5fjvdjt92p0kkfrxkl4c0pgvu4qdqdg9ekgenpwdjxvcqzpgxqzuysp5e7mf3lsz27y74w0kmw9wpz5fqnr4dyvvjl0f7gfalrwkjkhyeupq9qyyssq92z48la8dslzvxlfpvznr5k5gwdxtkwz5xev6q9t2wtz3u59f20zxtpyph6q4wmepsz3rtv5h2p5k2fc35q6cse89tcc06r8q40rlagqsn678t"
 
-let InvoiceDetailsTask = Task {
+//let account_id = "2701d902-2489-444b-86dd-bbe400261e3b"
+
+//let InvoiceDetailsTask = Task {
+//    do {
+//        let details: LNInvoiceDetails = try await api.getInvoiceInfoWithBolt11(bolt11: bolt11)
+//        print("Invoice Details: \(String(describing: details))")
+//    } catch let error {
+//        print("Error \(error)")
+//    }
+//}
+
+let decodeInvoiceTask = Task {
     do {
-        let details: LNInvoiceDetails = try await api.getInvoiceInfoWithBolt11(bolt11: bolt11)
-        print("Invoice Details: \(String(describing: details))")
+        let decodedInvoice = try await api.decodeInvoice(bolt11: bolt11)
+        print(decodedInvoice)
     } catch let error {
-        print("Error \(error)")
+        print(error)
     }
 }
 
-//let hash: String = await InvoiceDetailsTask.value
-
+//let payInvoiceTask = Task {
+//    do {
+//        let lnReceipt: LNInvoiceReceipt = try await api.payInvoice(accountId: account_id, bolt11: bolt11, amountMsat: 100000)
+//        print(lnReceipt)
+//    } catch let error {
+//        print(error)
+//    }
+//}
 
 
 

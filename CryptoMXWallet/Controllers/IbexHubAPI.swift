@@ -158,5 +158,19 @@ class IbexHubAPI {
         let (data, _) = try await URLSession.shared.data(for: request)
         return try JSONDecoder().decode(LNInvoiceDetails.self, from: data)
     }
+    
+    
+    func decodeInvoice(bolt11: String) async throws -> DecodedLNInvoice{
+        let url = URL(string: baseUrl + "/invoice/decode?bolt11=\(bolt11)")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(wafKey, forHTTPHeaderField: "X-WAF-KEY")
+        request.setValue(accessToken, forHTTPHeaderField: "Authorization")
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        return try JSONDecoder().decode(DecodedLNInvoice.self, from: data)
+    }
 
 }

@@ -100,9 +100,9 @@ class LightningController: ObservableObject {
 //        return details
 //    }
     
-    func decodeBolt11(bolt11: String) async throws -> LNInvoiceDetails {
-        let lnInvoiceDetails = try await ibexHubAPI.getInvoiceInfoWithBolt11(bolt11: bolt11)
+    func decodeBolt11(bolt11: String) async throws -> DecodedLNInvoice {
+        let decodedInvoice = try await ibexHubAPI.decodeInvoice(bolt11: bolt11)
         
-        return lnInvoiceDetails
+        return decodedInvoice
     }
 }

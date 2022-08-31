@@ -27,7 +27,7 @@ struct LNReceiveView: View {
 
     func createInvoice(){
         showInvoiceSheet = true
-        stateController.createInvoice(amount: amount, memo: memo)
+        stateController.createInvoice(amount: amount.toUInt64*1000, memo: memo)
     }
     
     func clearLatestInvoice(){

@@ -45,6 +45,11 @@ struct LNInvoiceReceipt: Codable {
     var feesMsat: UInt64
 }
 
+struct DecodedLNInvoice: Codable {
+    var amountMsat: UInt64
+    var description: String
+}
+
 struct LNInvoiceDetails: Codable {
     var hash: String
     var bolt11: String

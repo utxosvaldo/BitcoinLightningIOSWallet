@@ -39,11 +39,11 @@ struct LNSendView: View {
         Task {
             switch result {
             case .success(let code):
-                if let details: LNInvoiceDetails = try? await stateController.decodeInvoice(bolt11: code) {
+                if let details: DecodedLNInvoice = try? await stateController.decodeInvoice(bolt11: code) {
                     DispatchQueue.main.async {
-                        self.invoice = details.bolt11
+                        self.invoice = code
                         self.amount = String(details.amountMsat/1000)
-                        self.memo = details.memo
+                        self.memo = details.description
                         self.showScanner = false
                     }
                 } else {
