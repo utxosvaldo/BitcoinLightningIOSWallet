@@ -22,7 +22,7 @@ struct AppStarterView: View {
     
     func start(){
         goToBitcoin = true
-        stateController.signIntoIbex()
+//        stateController.signIntoIbex()
     }
 }
 

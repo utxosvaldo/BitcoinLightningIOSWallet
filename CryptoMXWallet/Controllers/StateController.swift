@@ -31,6 +31,7 @@ class StateController: ObservableObject {
             loadExistingLightningWallet()
             
         }
+         signIntoIbex()
     }
     
     func loadExistingBitcoinWallet(){
@@ -115,8 +116,7 @@ class StateController: ObservableObject {
                     self.storageController.saveLightningWallet(wallet: syncedLightningWallet)
                     print("Lightning wallet synced! Balance: \(self.lightningWallet.balanceSats)")
                 }
-            }
-            catch let error {
+            } catch let error {
                 print("Error while syncing lightning wallet: \(error)")
             }
         }
@@ -139,7 +139,6 @@ class StateController: ObservableObject {
     
     func loadExistingLightningWallet() {
         let existingWallet: LightningWallet = storageController.fetchLightningWallet()
-//        let initialWalletData: RequiredInitialLightningData = storageController.fetchInitialLightningWalletData()
         print("Loading existing lightning wallet with \(existingWallet)")
         
 //        Task {

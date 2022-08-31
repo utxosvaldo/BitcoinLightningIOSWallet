@@ -11,6 +11,7 @@ import BitcoinDevKit
 class LightningController: ObservableObject {
     private(set) var accountId: String!
     private(set) var ibexHubAPI = IbexHubAPI()
+
     
     func initializeIbexHub() async throws {
         print("Getting access token........")
