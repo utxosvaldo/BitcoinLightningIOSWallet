@@ -39,7 +39,7 @@ struct LNInvoice: Codable {
 }
 
 struct LNInvoiceReceipt: Codable {
-    var settleTimeUTC: String
+//    var settleDateUtc: UInt64
     var hash: String
     var amountMsat: UInt64
     var feesMsat: UInt64

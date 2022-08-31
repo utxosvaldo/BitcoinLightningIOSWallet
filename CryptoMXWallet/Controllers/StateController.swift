@@ -198,7 +198,7 @@ class StateController: ObservableObject {
         return details
     }
     
-    func payInvoice(bolt11: String, amountMsat: UInt64) {
+    func payInvoice(bolt11: String, amountMsat: UInt64){
         Task {
             print("Paying \(amountMsat) Milisatoshis")
             print("Paying invoice: \(bolt11)")

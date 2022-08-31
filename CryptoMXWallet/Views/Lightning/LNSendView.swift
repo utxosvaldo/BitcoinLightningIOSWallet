@@ -13,6 +13,7 @@ struct LNSendView: View {
     @State var invoice: String = ""
     @State var amount: String = ""
     @State var memo: String = ""
+    @State var paymentReceipt: LNInvoiceReceipt!
     @State private var showScanner = false
     @State private var showBroadcastAlert = false
     @State private var showHandleScanProgress = false
