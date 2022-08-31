@@ -46,18 +46,17 @@ struct LNInvoiceReceipt: Codable {
 }
 
 struct LNInvoiceDetails: Codable {
-    var id: UInt64
     var hash: String
     var bolt11: String
-    var preImage: String?
+    var preImage: String
     var memo: String
     var creationDateUtc: String
     var expiryDateUtc: String
-    var settleDateUtc: String?
+//    var settleDateUtc: String?
     var amountMsat: UInt64
     var receiveMsat: UInt64
     var stateId: Int
-    var state: LNInvoiceState
+//    var state: LNInvoiceState
     
 }
 

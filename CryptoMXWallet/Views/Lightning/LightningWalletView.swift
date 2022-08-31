@@ -54,12 +54,12 @@ extension LightningWalletView {
                 
                 HStack{
                     NavigationLink(destination: LNReceiveView()){
-                    PrimaryButton(text: "Receive", background: .green)
+                        PrimaryButton(text: "Receive", background: .green)
                     }
 //
-//                    NavigationLink(destination: SendView()){
-                    PrimaryButton(text: "Send", background: .red)
-//                    }
+                    NavigationLink(destination: LNSendView()){
+                        PrimaryButton(text: "Send", background: .red)
+                    }
                 }
                 
                 Spacer()

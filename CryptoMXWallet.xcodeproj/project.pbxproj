@@ -13,6 +13,7 @@
 		1824D0BD289B6233001C3F57 /* ReceiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824D0BC289B6233001C3F57 /* ReceiveView.swift */; };
 		1824D0BF289B71CF001C3F57 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824D0BE289B71CF001C3F57 /* Formatting.swift */; };
 		183C11DB28639CBA0071A291 /* BasicTextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C11DA28639CBA0071A291 /* BasicTextStyle.swift */; };
+		18473D4428BF101300BCB69A /* LNSendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18473D4328BF101300BCB69A /* LNSendView.swift */; };
 		1853D6A228B6BE6C005A7676 /* AppStarterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1853D6A128B6BE6C005A7676 /* AppStarterView.swift */; };
 		1853D6A428B6D790005A7676 /* SeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1853D6A328B6D790005A7676 /* SeedView.swift */; };
 		1853D6A828B6E58D005A7676 /* LNSeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1853D6A728B6E58D005A7676 /* LNSeedView.swift */; };
@@ -56,6 +57,7 @@
 		1824D0BC289B6233001C3F57 /* ReceiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveView.swift; sourceTree = "<group>"; };
 		1824D0BE289B71CF001C3F57 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		183C11DA28639CBA0071A291 /* BasicTextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTextStyle.swift; sourceTree = "<group>"; };
+		18473D4328BF101300BCB69A /* LNSendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LNSendView.swift; sourceTree = "<group>"; };
 		1853D6A128B6BE6C005A7676 /* AppStarterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStarterView.swift; sourceTree = "<group>"; };
 		1853D6A328B6D790005A7676 /* SeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedView.swift; sourceTree = "<group>"; };
 		1853D6A728B6E58D005A7676 /* LNSeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LNSeedView.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				187A3A5A288921370040D7CA /* LightningWalletView.swift */,
 				18238C8428AFDB870095858D /* LNReceiveView.swift */,
+				18473D4328BF101300BCB69A /* LNSendView.swift */,
 				1880C14928A715590048D9BC /* ImportLightningWalletView.swift */,
 				18823C7828A6D65B00D3572E /* CreateLightningWalletView.swift */,
 				187A3A62288C59140040D7CA /* WithdrawFundsView.swift */,
@@ -335,6 +338,7 @@
 				18823C7528A6D29100D3572E /* SetUpLightningWalletView.swift in Sources */,
 				18A089D7289A08DC0040D131 /* TestData.swift in Sources */,
 				18238C8528AFDB870095858D /* LNReceiveView.swift in Sources */,
+				18473D4428BF101300BCB69A /* LNSendView.swift in Sources */,
 				187A3A59288920790040D7CA /* BitcoinWalletView.swift in Sources */,
 				18A581C92883759F00FD076B /* WalletView.swift in Sources */,
 				1824D0BF289B71CF001C3F57 /* Formatting.swift in Sources */,

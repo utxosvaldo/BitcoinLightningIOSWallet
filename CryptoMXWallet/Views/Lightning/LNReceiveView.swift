@@ -54,7 +54,7 @@ extension LNReceiveView {
                         HStack {
                             TextField("Sats", text: $amount)
                                 .focused($isAmountFocused)
-                                .keyboardType(.numberPad)
+                                .keyboardType(.decimalPad)
                             DoneButton(isAmountFocused: isAmountFocused, action: {isAmountFocused = false})
                         }
                     }

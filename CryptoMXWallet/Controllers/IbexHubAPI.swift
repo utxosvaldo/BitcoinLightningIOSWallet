@@ -126,7 +126,7 @@ class IbexHubAPI {
     }
     
     func payInvoice(accountId: String, bolt11: String, amountMsat: UInt64) async throws -> LNInvoiceReceipt {
-        let url = URL(string: baseUrl + "/invoice/add")!
+        let url = URL(string: baseUrl + "/invoice/pay")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

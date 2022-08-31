@@ -28,7 +28,7 @@ class LightningController: ObservableObject {
         ibexHubAPI.updateAccessToken(accessToken: accessToken)
     }
     
-    func initializeWallet(id: String) async throws -> LightningWallet{
+    private func initializeWallet(id: String) async throws -> LightningWallet{
         let detailsTask = Task {() -> IbexAccountDetails? in
             let details = try await ibexHubAPI.getAccountDetails(accountId: id)
             return details
@@ -87,6 +87,18 @@ class LightningController: ObservableObject {
         
         return lnInvoiceReceipt
     }
+    
+    
+//    func decodeBolt11(bolt11: String) async throws -> LNInvoiceDetails{
+//        let detailsTask = Task {() -> LNInvoiceDetails? in
+//            let details = try await ibexHubAPI.getInvoiceInfoWithBolt11(bolt11: bolt11)
+//            return details
+//        }
+//        
+//        let details = try await detailsTask.value!
+//        
+//        return details
+//    }
     
     func decodeBolt11(bolt11: String) async throws -> LNInvoiceDetails {
         let lnInvoiceDetails = try await ibexHubAPI.getInvoiceInfoWithBolt11(bolt11: bolt11)

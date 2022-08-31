@@ -12,7 +12,20 @@ import UIKit
 
 
 let api = IbexHubAPI()
-let lnController = LightningController()
+
+
+let getAccessTask = Task {
+    do {
+        let auth = try await api.getAccessToken()
+        api.updateAccessToken(accessToken: auth.accessToken)
+        print(auth.accessToken)
+    } catch let error {
+        print(error)
+    }
+}
+
+
+//let lnController = LightningController()
 
 //let transactionTask = Task {
 //    do {
@@ -32,9 +45,19 @@ let lnController = LightningController()
 //    }
 //}
 
-let bolt11 = "lnbc10n1p30lg68pp5rqv7u6hds08gc54k5x5eze6usm8c7pz3nz952gvfxac7frwyvmaqdqqcqzpgxqzuysp5gc4pur9wgu5de5738n4fc58kj77m0a4xgl8tmzm5nwjvjjln8dhs9qyyssqjr0zt7eygxsq8z5gvae745p0qduzgk4eqlem3v92t4au9tsugz7nxhgxl5cv8g9mf2kd2k76yvv4dy2r0cyetkv8d4vyf5p69sqw6ngqep3u3g"
+let bolt11 = "lnbc12345670p1p3samkvpp5977wedmjd2jferhpas8m4msl62hffurmjrgsyy5lvwut6t3lpy5qdq623jhxapqd4jk6meqwashwcthvycqzpgxqzuysp5pl9evjf3jcmzey49pj0j7r2lqad7rgpeplwm4x04kskvm7zufgks9qyyssqaxyev39vevn75yxdyte4p460mmcxgs0esewfrqpfx5lfsdpkea0r525ehcwkal0r6ty32g9s2tnujs4kn6y2fq6vjmjfkkkmt50082spwc6r0q"
 
-print("\(bolt11.prefix(10))...\(bolt11.suffix(10))")
+let InvoiceDetailsTask = Task {
+    do {
+        let details: LNInvoiceDetails = try await api.getInvoiceInfoWithBolt11(bolt11: bolt11)
+        print("Invoice Details: \(String(describing: details))")
+    } catch let error {
+        print("Error \(error)")
+    }
+}
+
+//let hash: String = await InvoiceDetailsTask.value
+
 
 
 

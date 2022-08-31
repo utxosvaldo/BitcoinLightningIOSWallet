@@ -18,6 +18,8 @@ class StateController: ObservableObject {
     @Published var bitcoinWallet: BitcoinWallet!
     @Published var lightningWallet: LightningWallet!
     @Published var latestLNInvoice: LNInvoice!
+    @Published var latestLNInvoiceDetails: LNInvoiceDetails!
+    @Published var decodingInvoice = false
     private(set) var accessToken: String!
     private(set) var lightningController = LightningController()
     private(set) var bitcoinController = BitcoinController()
@@ -191,10 +193,28 @@ class StateController: ObservableObject {
         latestLNInvoice = nil
     }
     
+    func decodeInvoice(bolt11: String) async throws -> LNInvoiceDetails{
+        let details: LNInvoiceDetails = try await self.lightningController.decodeBolt11(bolt11: bolt11)
+        return details
+    }
+    
+    func payInvoice(bolt11: String, amountMsat: UInt64) {
+        Task {
+            print("Paying \(amountMsat) Milisatoshis")
+            print("Paying invoice: \(bolt11)")
+            do {
+                let receipt = try await lightningController.payInvoice(bolt11: bolt11, amountMsat: amountMsat)
+                print(receipt)
+            } catch let error {
+                print("Error while paying invoice: \(error)")
+            }
+        }
+    }
+    
     func createInvoice(amount: String, memo: String){
         Task {
             do{
-                let lnInvoice = try await self.lightningController.addInvoice(amountMsat: amount.toUInt64, memo: memo)
+                let lnInvoice = try await self.lightningController.addInvoice(amountMsat: amount.toUInt64*1000, memo: memo)
                 
                 DispatchQueue.main.async {
                     self.latestLNInvoice = lnInvoice
