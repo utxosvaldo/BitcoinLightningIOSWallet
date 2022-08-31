@@ -13,6 +13,10 @@ class LightningController: ObservableObject {
     private(set) var ibexHubAPI = IbexHubAPI()
 
     
+    func updateAccountId(id: String){
+        self.accountId = id
+    }
+    
     func initializeIbexHub() async throws {
         print("Getting access token........")
         let signInTask = Task {() -> String in

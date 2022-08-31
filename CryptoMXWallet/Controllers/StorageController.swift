@@ -31,7 +31,34 @@ class StorageController {
         self.userDefaults.set(wallet.id, forKey: "lightningId")
         self.userDefaults.set(wallet.name, forKey: "lightningName")
         self.userDefaults.set(wallet.balanceMsats, forKey: "lightningBalance")
-        self.userDefaults.set(wallet.transactions, forKey: "lightningTransactions")
+        self.saveLightningTransactions(transactions: wallet.transactions)
+    }
+    
+    func saveLightningTransactions(transactions: [LNTransaction]){
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(transactions) {
+            self.userDefaults.set(encoded, forKey: "lightningTransactions")
+        } else {
+            print("Error while saving lightning transactions to userDefaults")
+        }
+    }
+    
+    func fetchLightningTransactions() -> [LNTransaction] {
+        var transactions: [LNTransaction] = []
+        
+        if let savedTransactions = self.userDefaults.object(forKey: "lightningTransactions") as? Data{
+            let decoder = JSONDecoder()
+            if let loadedTransactions = try? decoder.decode([LNTransaction].self, from: savedTransactions){
+                print("Loaded transactions: \(loadedTransactions)")
+                transactions = loadedTransactions
+            } else {
+                print("Error while decoding saved transactions.")
+            }
+        } else {
+            print("Error while loading saved transactions from userDefaults.")
+        }
+        
+        return transactions
     }
     
     func saveBitcoinWallet(descriptor: String, changeDescriptor: String){
@@ -61,16 +88,9 @@ class StorageController {
         let id: String = self.userDefaults.value(forKey: "lightningId") as? String ?? ""
         let name: String = self.userDefaults.value(forKey: "lightningName") as? String ??  ""
         let balance: UInt64 = self.userDefaults.value(forKey: "lightningBalance") as? UInt64 ?? 0
-        let transactions: [LNTransaction] = self.userDefaults.value(forKey: "lightningTransactions") as? [LNTransaction] ?? []
+        let transactions: [LNTransaction] = self.fetchLightningTransactions()
         
         return LightningWallet(id: id, name: name, balanceMsats: balance, transactions: transactions)
         
-    }
-    
-    func fetchInitialLightningWalletData() -> RequiredInitialLightningData {
-        let id: String = self.userDefaults.value(forKey: "lightningId") as? String ?? ""
-        let name: String = self.userDefaults.value(forKey: "lightningName") as? String ??  ""
-        
-        return RequiredInitialLightningData(id: id, name: name)
     }
 }

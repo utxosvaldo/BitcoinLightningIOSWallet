@@ -34,6 +34,11 @@ class StateController: ObservableObject {
          signIntoIbex()
     }
     
+    func finishInitialSetUp(){
+        self.storageController.saveSetUpDone()
+        self.setUpDone = true
+    }
+    
     func loadExistingBitcoinWallet(){
         let initialWalletData: RequiredInitialData = storageController.fetchInitialWalletData()
         print("Loading existing bitcoin wallet with \(initialWalletData)")
@@ -141,19 +146,9 @@ class StateController: ObservableObject {
         let existingWallet: LightningWallet = storageController.fetchLightningWallet()
         print("Loading existing lightning wallet with \(existingWallet)")
         
-//        Task {
-//            do{
-//                let loadedLightningWallet = try await lightningController.initializeWallet(id: initialWalletData.id)
-//
-//                DispatchQueue.main.async {
         self.lightningWallet = existingWallet
+        self.lightningController.updateAccountId(id: existingWallet.id)
         self.lightningWalletExists = true
-//                }
-//            }
-//            catch let error{
-//                print("Error while loading lightning wallet: \(error)")
-//            }
-//        }
     }
 
     

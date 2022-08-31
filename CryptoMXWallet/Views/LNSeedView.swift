@@ -26,7 +26,7 @@ struct LNSeedView: View {
     }
     
     func backedUpInfo() {
-        stateController.setUpDone = true
+        stateController.finishInitialSetUp()
     }
 }
 
