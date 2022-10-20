@@ -20,7 +20,7 @@ import Foundation
 
 class IbexHubAPI {
     private let baseUrl: String = "https://ibexhub.ibexmercado.com"
-    private let wafKey: String = "gNH31456bsuyjdlaujdxbyojR"
+    private let wafKey: String! = ProcessInfo.processInfo.environment["WAF_KEY"]
     private(set) var accessToken: String!
     
 //    init(accessToken: String){
