@@ -43,6 +43,10 @@ Features include
 
 BitoinLightningIOSWallet was inspired by @thunderbiscuit's [Bitcoindevkit Android Demo Wallet](https://github.com/thunderbiscuit/bitcoindevkit-android-sample-app) and @futurepaul's [BdkSwiftSample](https://github.com/futurepaul/BdkSwiftSample), with the primary changes being a code restructure following the MVVM design pattern and Lightning payments integration.
 
+Check this app transactions on Mainnet:
+ - Received 501 sats, TXID: [28f82da2adfa482225c4019d011bf062dd3474ccd59f50b5027ec758a6e6c13b](https://mempool.space/tx/28f82da2adfa482225c4019d011bf062dd3474ccd59f50b5027ec758a6e6c13b)
+ - Sent 8000 sats TXID: [aaa68a80cea4842647966d336cbef961029e51d0661a53ea4b201883ea756ff6](https://mempool.space/tx/aaa68a80cea4842647966d336cbef961029e51d0661a53ea4b201883ea756ff6)
+
 ## Requirements
 - Electrum server
 - IbexHub API account
