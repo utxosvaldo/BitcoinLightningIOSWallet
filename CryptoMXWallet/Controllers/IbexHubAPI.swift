@@ -20,7 +20,7 @@ import Foundation
 
 class IbexHubAPI {
     private let baseUrl: String = "https://ibexhub.ibexmercado.com"
-    private let wafKey: String = "gkfY34ZNXxRldiH19tqVNJFH3xbyojR"
+    private let wafKey: String = "gNH31456bsuyjdlaujdxbyojR"
     private(set) var accessToken: String!
     
 //    init(accessToken: String){
@@ -41,8 +41,8 @@ class IbexHubAPI {
         request.setValue(wafKey, forHTTPHeaderField: "X-WAF-KEY")
         
         let body: [String: AnyHashable] = [
-            "email": "osvaldo.rosales.96@gmail.com",
-            "password": "Lightning69!"
+            "email": "sample@email.com",
+            "password": "1234"
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: .fragmentsAllowed)
         
