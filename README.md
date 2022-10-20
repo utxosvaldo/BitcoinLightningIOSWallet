@@ -38,7 +38,7 @@ Features include
  - Sync with Electrum Server for Blockchain data and transaction broadcast (Mainnet & Testnet).
  - Create Lightning invoice.
  - Pay Lightning invoice.
- - Transactin history.
+ - Transaction history.
  - Scan Bitcoin and Lightning invoice QR codes.
 
 BitoinLightningIOSWallet was inspired by @thunderbiscuit's [Bitcoindevkit Android Demo Wallet](https://github.com/thunderbiscuit/bitcoindevkit-android-sample-app) and @futurepaul's [BdkSwiftSample](https://github.com/futurepaul/BdkSwiftSample), with the primary changes being a code restructure following the MVVM design pattern and Lightning payments integration.
