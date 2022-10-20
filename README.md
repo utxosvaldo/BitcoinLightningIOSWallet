@@ -5,7 +5,7 @@
     <td> <h2 align="center">Home</h2> </td>
     <td> <h2 align="center">Bitcoin Wallet</h2> </td>
     <td> <h2 align="center">Lightning Wallet</h2> </td>
-    <td> <h2 align="center">Import Seed</h2> </td>
+    <td> <h2 align="center">Transaction History</h2> </td>
   </tr>
   <tr>
     <td> <img src="./Sample-Screenshots/01_Startapp.PNG"  alt="1" width = 200px> </td>
