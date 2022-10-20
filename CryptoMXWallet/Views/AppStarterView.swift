@@ -33,9 +33,21 @@ extension AppStarterView {
         var body: some View {
             VStack(spacing: 40){
                 VStack(spacing: 20){
-                    Text("CryptoMX")
-                        .lilacTitle()
+                    HStack{
+                        Image(systemName: "bitcoinsign.circle")
+                            .foregroundColor(Color("AccentColor"))
+                            .imageScale(.large)
+                        Text("Bitcoin")
+                            .lilacTitle()
+                        Text("Lightning")
+                            .lilacTitle()
+                        Image(systemName: "bolt.circle")
+                            .foregroundColor(Color("AccentColor"))
+                            .imageScale(.large)
+                    }
                     Text("wallet")
+                        .lilacTitle()
+                    Text("By Osvaldo Rosales")
                         .foregroundColor(Color("AccentColor"))
                 }
 
