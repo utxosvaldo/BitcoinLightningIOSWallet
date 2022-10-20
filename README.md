@@ -11,7 +11,7 @@
     <td> <img src="./Sample-Screenshots/01_Startapp.PNG"  alt="1" width = 200px> </td>
     <td> <img src="./Sample-Screenshots/06_BitcoinWalletView.PNG"  alt="1" width = 200px> </td>
     <td> <img src="./Sample-Screenshots/09_LightningWalletView.PNG"  alt="1" width = 200px> </td>
-    <td> <img src="./Sample-Screenshots/13_ImportBitcoinWallet.PNG"  alt="1" width = 200px> </td>
+    <td> <img src="./Sample-Screenshots/14_TransactionHistory.PNG"  alt="1" width = 200px> </td>
   </tr>
   
   
